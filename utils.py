@@ -42,13 +42,25 @@ def generateTriangles(angle, N):
     point3 = [math.sin(angle/2), math.cos(angle/2)]
 
     triangleCoordinates = np.zeros((3,2*N))
-    triangleCoordinates[0, 0:2] = point1
-    triangleCoordinates[1, 0:2] = point2
-    triangleCoordinates[2, 0:2] = point3
+    boundary = np.zeros((3, 2))
+
+    triangleCoordinates[0, 0:2], boundary[0, 0:2] = point1
+    triangleCoordinates[1, 0:2], boundary[0, 0:2] = point2
+    triangleCoordinates[2, 0:2], boundary[0, 0:2] = point3
 
     # Generate the other N-1 triangles
     for i in range(2, N):
-        print(i)
+        # Select line on boundary on which to add new triangle, try to add new triangle
+        [a, b] = boundary.shape
+        addedTriangle = False
+        while (not addedTriangle):
+            
+            if (validTriangle):
+                addedTriangle = True
+
+        # Add on new triangle
+
+        # Update boundary
 
     return triangleCoordinates
 

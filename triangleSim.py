@@ -1,8 +1,10 @@
 import numpy as np
 import math
-from utils import *
 import argparse
 import os
+
+from utils import *
+from mathUtils import *
 
 
 def arg_parse():
