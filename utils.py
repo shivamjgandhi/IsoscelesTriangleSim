@@ -53,12 +53,10 @@ def generateTriangles(angle, N):
         # Select line on boundary on which to add new triangle, try to add new triangle
         [a, b] = boundary.shape
         addedTriangle = False
-        while (not addedTriangle):
-            
-            if (validTriangle):
-                addedTriangle = True
+        while not addedTriangle:
 
-        # Add on new triangle
+            if not intersection(boundary, triangle):
+                addedTriangle = True
 
         # Update boundary
 

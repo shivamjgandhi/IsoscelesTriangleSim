@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="14464fe2-7ab8-4068-ae33-78efe3575590" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/mathUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/mathUtils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/triangleSim.py" beforeDir="false" afterPath="$PROJECT_DIR$/triangleSim.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="56" column="12" selection-start-line="56" selection-start-column="12" selection-end-line="56" selection-end-column="12" />
+            <state relative-caret-position="330">
+              <caret line="52" column="87" lean-forward="true" selection-start-line="52" selection-start-column="87" selection-end-line="52" selection-end-column="87" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -41,8 +40,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mathUtils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="627">
+              <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -148,12 +147,12 @@
       <option name="presentableId" value="Default" />
       <updated>1545314721097</updated>
       <workItem from="1545314723639" duration="1301000" />
-      <workItem from="1545358744751" duration="1189000" />
+      <workItem from="1545358744751" duration="1577000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2490000" />
+    <option name="totallyTimeSpent" value="2878000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3266" height="2106" extended-state="6" />
@@ -199,8 +198,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mathUtils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="627">
+          <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -209,8 +208,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="56" column="12" selection-start-line="56" selection-start-column="12" selection-end-line="56" selection-end-column="12" />
+        <state relative-caret-position="330">
+          <caret line="52" column="87" lean-forward="true" selection-start-line="52" selection-start-column="87" selection-end-line="52" selection-end-column="87" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
