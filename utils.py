@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import numpy as np
 import math
+from mathUtils import *
 
 
 def newline(p1, p2):
@@ -34,10 +35,20 @@ def generateTriangles(angle, N):
     :param N: The number of triangles to be generated
     :return: triangleCoordinates: the coordinates of the N acute triangle's points
     """
-
+    angle = toRadians(angle)
     # generate the first triangle
     point1 = [0, 0]
-    point2 = 
+    point2 = [2*math.sin(angle/2), 0]
+    point3 = [math.sin(angle/2), math.cos(angle/2)]
+
+    triangleCoordinates = np.zeros((3,2*N))
+    triangleCoordinates[0, 0:2] = point1
+    triangleCoordinates[1, 0:2] = point2
+    triangleCoordinates[2, 0:2] = point3
+
+    # Generate the other N-1 triangles
+    for i in range(2, N):
+        print(i)
 
     return triangleCoordinates
 
