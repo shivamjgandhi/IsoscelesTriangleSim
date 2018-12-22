@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import numpy as np
 import math
+from random import randint
+
 from mathUtils import *
 
 
@@ -54,9 +56,11 @@ def generateTriangles(angle, N):
         [a, b] = boundary.shape
         addedTriangle = False
         while not addedTriangle:
+            edge = randint((0,b))
 
             if not intersection(boundary, triangle):
                 addedTriangle = True
+
 
         # Update boundary
 
@@ -66,6 +70,12 @@ def generateTriangles(angle, N):
 def drawTriangeles(coordinates):
     """
 
-    :param coordinates: The triples containing the coordinates of the triangles's points
+    :param coordinates: The triples containing the coordinates of the triangles's points.
+    An 3x2*N array where N is the number of triangles
     :return:
     """
+    N = coordinates.shape[1]/2
+    for i in range(0,2):
+        for j in range(0,N):
+            plt.plot(coordinates[i][2*j], coordinates[i][2*j+1], marker = 'o')
+    return plt

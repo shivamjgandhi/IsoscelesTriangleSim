@@ -20,7 +20,7 @@ def intersection(boundary, triangle):
     :return isIntersection: tells whether or not the new triangle intersects the boundary
     """
     isIntersection = False
-    [a, b] = boundary.shape
+    b = boundary.shape[1]
     for i in range(0, b):
         point1 = boundary[0:2, b]
         point2 = boundary[0:2, b+1]
