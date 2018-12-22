@@ -10,6 +10,7 @@ def toRadians(angle):
     """
     return angle*math.pi/180
 
+
 def intersection(boundary, triangle):
     """
     Tells whether or not the new triangle intersects the boundary
@@ -26,9 +27,33 @@ def intersection(boundary, triangle):
         mBoundary = (point2[1]-point1[1])/(point2[0] - point1[0])
         bBoundary = point1[1] - mBoundary*point1[0]
         # Check if line 1 intersects
-
+        m1 = (triangle[0][1] - triangle[1][1])/(triangle[0][0] - triangle[1][0])
+        b1 = triangle[0][1] - m1*triangle[0][0]
+        if m1 == mBoundary:
+            print('Matching slopes')
+        else:
+            x = - (bBoundary - b1)/(mBoundary - m1)
+            if (x < triangle[0][0]) or (x > triangle[1][0]):
+                isIntersection = True
 
         # Check if line 2 intersects
+        m2 = (triangle[1][1] - triangle[2][1])/(triangle[1][0] - triangle[2][0])
+        b2 = triangle[1][1] - m2*triangle[1][0]
+        if m2 == mBoundary:
+            print('Matching slope')
+        else:
+            x = - (bBoundary - b2)/(mBoundary - m2)
+            if (x < triangle[1][0]) or (x > triangle[2][0]):
+                isIntersection = True
 
         # Check if line 3 intersects
+        m3 = (triangle[2][1] - triangle[0][1])/(triangle[2][0] - triangle[0][0])
+        b3 = triangle[2][1] - m3*triangle[2][0]
+        if m3 == mBoundary:
+            print('Matching slope')
+        else:
+            x = -(bBoundary - b3)/(mBoundary - m3)
+            if (x < triangle[2][0]) or (x > triangle[0][0]):
+                isIntersection = True
+
     return isIntersection
