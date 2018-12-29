@@ -3,6 +3,7 @@ import matplotlib.lines as mlines
 import numpy as np
 import math
 from random import randint
+from triangleClass import *
 
 from mathUtils import *
 
@@ -50,13 +51,16 @@ def generateTriangles(angle, N):
     triangleCoordinates[1, 0:2], boundary[0, 0:2] = point2
     triangleCoordinates[2, 0:2], boundary[0, 0:2] = point3
 
+    firstTriangle = triangle(triangleCoordinates)
+
     # Generate the other N-1 triangles
     for i in range(2, N):
         # Select line on boundary on which to add new triangle, try to add new triangle
-        [a, b] = boundary.shape
+        b = boundary.shape[1]
         addedTriangle = False
         while not addedTriangle:
-            edge = randint((0,b))
+            edge = randint((0, b))
+            triangle = generateIndividualTriangle(boundary, edge)
 
             if not intersection(boundary, triangle):
                 addedTriangle = True
@@ -67,7 +71,7 @@ def generateTriangles(angle, N):
     return triangleCoordinates
 
 
-def drawTriangeles(coordinates):
+def drawTriangles(coordinates):
     """
 
     :param coordinates: The triples containing the coordinates of the triangles's points.
@@ -79,3 +83,12 @@ def drawTriangeles(coordinates):
         for j in range(0,N):
             plt.plot(coordinates[i][2*j], coordinates[i][2*j+1], marker = 'o')
     return plt
+
+def generateIndividualTriangle(boundary, edge):
+    """
+    Generates an individual triangle based on the existing boundary and the edge we want to add the triangle to
+
+    :param boundary: The existing shape's boundary
+    :param edge: The edge that we're adding the triangle onto
+    :return: the coordinates of the new triangle object
+    """
