@@ -47,10 +47,11 @@ def generateTriangles(angle, N):
     triangleCoordinates = np.zeros((3,2*N))
     boundary = np.zeros((3, 2))
 
-    triangleCoordinates[0, 0:2], boundary[0, 0:2] = point1
-    triangleCoordinates[1, 0:2], boundary[0, 0:2] = point2
-    triangleCoordinates[2, 0:2], boundary[0, 0:2] = point3
-
+    triangleCoordinates[0] = point1
+    triangleCoordinates[1] = point2
+    triangleCoordinates[2] = point3
+    print(triangleCoordinates[2], point3)
+    """
     firstTriangle = triangle(triangleCoordinates)
 
     # Generate the other N-1 triangles
@@ -67,6 +68,8 @@ def generateTriangles(angle, N):
 
 
         # Update boundary
+        
+    """
 
     return triangleCoordinates
 
@@ -78,11 +81,12 @@ def drawTriangles(coordinates):
     An 3x2*N array where N is the number of triangles
     :return:
     """
-    N = coordinates.shape[1]/2
-    for i in range(0,2):
-        for j in range(0,N):
-            plt.plot(coordinates[i][2*j], coordinates[i][2*j+1], marker = 'o')
+    N = int(coordinates.shape[1]/2)
+    for i in range(0,3):
+        for j in range(0, N):
+            plt.plot(coordinates[i][2*j], coordinates[i][2*j+1], marker='o')
     return plt
+
 
 def generateIndividualTriangle(boundary, edge):
     """
@@ -92,3 +96,4 @@ def generateIndividualTriangle(boundary, edge):
     :param edge: The edge that we're adding the triangle onto
     :return: the coordinates of the new triangle object
     """
+

@@ -21,6 +21,11 @@ def arg_parse():
 
 def main():
     args = arg_parse()
-    angle = args['angle']
-    N = args['N']
-    triangleCoodinates = generateTriangles(angle, N)
+    angle = args.angle
+    N = args.N
+    triangleCoordinates = generateTriangles(angle, N)
+    drawTriangles(triangleCoordinates).show()
+
+
+if __name__ == '__main__':
+    main()
