@@ -107,11 +107,20 @@ def generateIndividualTriangle(boundary, edge, angle):
     """
     added = False
     b = boundary.shape[0]
+    angle = toRadians(angle)
     point1 = boundary[edge]
-    point2 = boundary[(edge+1)%b]
+    point2 = boundary[(edge+1) % b]
+    AB = point2 - point1
+    Midpoint = point1 + 1/2*point2
+    alpha = math.acos(AB[0]/norm(AB))
+    e = [math.cos(math.pi/2 + alpha), math.sin(math.pi/2 + alpha)]
+    magnitude = 1/2 * norm(AB) / math.tan(angle/2)
+    v = magnitude*e
     # try first orientation
-
+    point3 = Midpoint + v
     # try second orientation
+    if not added:
+        point3 = Midpoint -v
 
     if not added:
         return False

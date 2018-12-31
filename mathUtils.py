@@ -11,6 +11,15 @@ def toRadians(angle):
     return angle*math.pi/180
 
 
+def norm(vector):
+    """
+    Returns the norm of a vector
+    :param vector: input vector
+    :return: norm
+    """
+    return math.sqrt(vector[0]*vector[0] + vector[1]*vector[1])
+
+
 def intersection(boundary, triangle):
     """
     Tells whether or not the new triangle intersects the boundary
