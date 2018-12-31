@@ -57,7 +57,7 @@ def generateTriangles(angle, N):
     # Generate the other N-1 triangles
     for i in range(2, N):
         # Select line on boundary on which to add new triangle, try to add new triangle
-        b = boundary.shape[1]
+        b = boundary.shape[0]
         addedTriangle = False
         while not addedTriangle:
             edge = randint((0, b))
@@ -106,8 +106,11 @@ def generateIndividualTriangle(boundary, edge, angle):
     :return: the coordinates of the new triangle object
     """
     added = False
+    b = boundary.shape[0]
+    point1 = boundary[edge]
+    point2 = boundary[(edge+1)%b]
     # try first orientation
-
+    
     # try second orientation
 
     if not added:
