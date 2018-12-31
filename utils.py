@@ -110,7 +110,7 @@ def generateIndividualTriangle(boundary, edge, angle):
     point1 = boundary[edge]
     point2 = boundary[(edge+1)%b]
     # try first orientation
-    
+
     # try second orientation
 
     if not added:
