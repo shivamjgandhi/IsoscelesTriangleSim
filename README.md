@@ -1,4 +1,4 @@
-# IsosceleseTriangleSim
+# IsoscelesTriangleSim
 
 This is the simulator for random packings of isosceles triangles. You can specify the amount of triangles you want to pack and the main 
 angle for the triangles. 
