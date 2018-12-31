@@ -97,12 +97,18 @@ def drawTriangles(coordinates):
     return plt
 
 
-def generateIndividualTriangle(boundary, edge):
+def generateIndividualTriangle(boundary, edge, angle):
     """
     Generates an individual triangle based on the existing boundary and the edge we want to add the triangle to
 
-    :param boundary: The existing shape's boundary
-    :param edge: The edge that we're adding the triangle onto
+    :param boundary: The existing shape's boundary, a list
+    :param edge: The edge that we're adding the triangle onto, an int
     :return: the coordinates of the new triangle object
     """
+    added = False
+    # try first orientation
 
+    # try second orientation
+
+    if not added:
+        return False
