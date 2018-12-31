@@ -82,9 +82,18 @@ def drawTriangles(coordinates):
     :return:
     """
     N = int(coordinates.shape[1]/2)
-    for i in range(0,3):
-        for j in range(0, N):
-            plt.plot(coordinates[i][2*j], coordinates[i][2*j+1], marker='o')
+    print(N)
+    for j in range(0, N):
+        print(coordinates)
+        plt.plot([coordinates[0][2*j], coordinates[1][2*j]],
+                 [coordinates[0][2*j+1], coordinates[1][2*j+1]],
+                 marker='o')
+        plt.plot([coordinates[1][2*j], coordinates[2][2*j]],
+                 [coordinates[1][2*j+1], coordinates[2][2*j+1]],
+                 marker='o')
+        plt.plot([coordinates[2][2*j], coordinates[0][2*j]],
+                 [coordinates[2][2*j+1], coordinates[0][2*j+1]],
+                 marker='o')
     return plt
 
 
