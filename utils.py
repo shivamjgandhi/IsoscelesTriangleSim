@@ -103,9 +103,9 @@ def generateIndividualTriangle(boundary, edge, angle):
 
     :param boundary: The existing shape's boundary, a list
     :param edge: The edge that we're adding the triangle onto, an int
+    :param angle: the angle of the isosceles triangle
     :return: the coordinates of the new triangle object
     """
-    added = False
     b = boundary.shape[0]
     angle = toRadians(angle)
     point1 = boundary[edge]
@@ -116,6 +116,7 @@ def generateIndividualTriangle(boundary, edge, angle):
     e = [math.cos(math.pi/2 + alpha), math.sin(math.pi/2 + alpha)]
     magnitude = 1/2 * norm(AB) / math.tan(angle/2)
     v = magnitude*e
+
     # try first orientation
     point3 = Midpoint + v
     coordinates = np.zeros((3,2))
@@ -123,9 +124,15 @@ def generateIndividualTriangle(boundary, edge, angle):
     coordinates[1] = point2
     coordinates[2] = point3
     newTriangle = triangle(coordinates)
+    added = intersection(boundary, newTriangle, edge)
+
     # try second orientation
     if not added:
         point3 = Midpoint - v
+        coordinates[2] = point3
+        newTriangle.setCoordinates(coordinates)
+        added = intersection(boundary, newTriangle, edge)
 
+    # In the case that neither side works, return false
     if not added:
         return False
