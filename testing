@@ -34,7 +34,7 @@ class mathUtilsTest(unittest.TestCase):
         self.assertEqual(norm([1, 0]), 1)
         self.assertEqual(norm([0, 1]), 1)
 
-    def testIntersection(self):
+    #def testIntersection(self):
         # boundary, triangle, edge
 
 if __name__ == '__main__':
