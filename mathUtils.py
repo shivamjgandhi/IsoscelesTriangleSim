@@ -20,7 +20,7 @@ def norm(vector):
     return math.sqrt(vector[0]*vector[0] + vector[1]*vector[1])
 
 
-def intersection(boundary, triangle):
+def intersection(boundary, triangle, edge):
     """
     Tells whether or not the new triangle intersects the boundary
 

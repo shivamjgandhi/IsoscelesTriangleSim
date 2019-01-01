@@ -118,9 +118,14 @@ def generateIndividualTriangle(boundary, edge, angle):
     v = magnitude*e
     # try first orientation
     point3 = Midpoint + v
+    coordinates = np.zeros((3,2))
+    coordinates[0] = point1
+    coordinates[1] = point2
+    coordinates[2] = point3
+    newTriangle = triangle(coordinates)
     # try second orientation
     if not added:
-        point3 = Midpoint -v
+        point3 = Midpoint - v
 
     if not added:
         return False
