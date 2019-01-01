@@ -26,6 +26,7 @@ def intersection(boundary, triangle, edge):
 
     :param boundary: the boundary of the shape created so far
     :param triangle: 3x2 array with the 3 points of the triangle
+    :param edge: the edge that we're building the triangle off of
     :return isIntersection: tells whether or not the new triangle intersects the boundary
     """
     isIntersection = False
