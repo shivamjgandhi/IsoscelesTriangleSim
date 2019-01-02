@@ -124,7 +124,8 @@ def generateIndividualTriangle(boundary, edge, angle):
     coordinates[1] = point2
     coordinates[2] = point3
     newTriangle = triangle(coordinates)
-    added = intersection(boundary, newTriangle, edge)
+    # added = intersection(boundary, newTriangle, edge)
+    added = True
 
     # try second orientation
     if not added:
@@ -138,5 +139,5 @@ def generateIndividualTriangle(boundary, edge, angle):
         return False
     else:
         # add to the boundary
-        #
+
         return boundary
