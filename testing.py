@@ -1,5 +1,6 @@
 import unittest
 import math
+import numpy as np
 
 from utils import *
 from mathUtils import *
@@ -8,8 +9,8 @@ class UtilsTest(unittest.TestCase):
 
     def test_generateIndividualTriangle(self):
         # boundary, edge, angle
-        boundary = [[0, 0],
-                    [1, 0]]
+        boundary = np.array([[0, 0],
+                             [1, 0]])
         edge = 1
         angle = 60
         triangleCoordinates = generateIndividualTriangle(boundary, edge, angle)
