@@ -39,6 +39,7 @@ def intersection(boundary, triangle, edge):
         b1 = triangle[0][1] - m1*triangle[0][0]
         if m1 == mBoundary:
             print('Matching slopes')
+            # initiate sequence that checks whether it's the same line or not
         else:
             x = - (bBoundary - b1)/(mBoundary - m1)
             if (x < triangle[0][0]) or (x > triangle[1][0]):
