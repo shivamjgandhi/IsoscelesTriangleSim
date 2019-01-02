@@ -37,6 +37,19 @@ class mathUtilsTest(unittest.TestCase):
     #def testIntersection(self):
         # boundary, triangle, edge
 
+class triangleClassTest(unittest.TestCase):
+
+    def testTriangle(self):
+        newTriangle = triangle([[0,0],
+                               [1,0],
+                               [1,1]])
+        self.assertEqual(newTriangle.coordinates, [[0,0],
+                                                   [1,0],
+                                                   [1,1]])
+
+        newBoundary = boundaryObject(newTriangle.coordinates, 1)
+        self.assertEqual(newBoundary.boundary, newTriangle.coordinates)
+        self.assertEqual(newBoundary.triangleCount, 1)
 
 if __name__ == '__main__':
     unittest.main()

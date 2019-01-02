@@ -33,7 +33,7 @@ def newline(p1, p2):
 
 def generateTriangles(angle, N):
     """
-
+    Generates N isosceles triangles in a monte-carlo fashion to create a random packing
     :param angle: the main angle of the isosceles triangles being simulated
     :param N: The number of triangles to be generated
     :return: triangleCoordinates: the coordinates of the N acute triangle's points
@@ -41,8 +41,8 @@ def generateTriangles(angle, N):
     angle = toRadians(angle)
     # generate the first triangle
     point1 = [0, 0]
-    point2 = [2*math.sin(angle/2), 0]
-    point3 = [math.sin(angle/2), math.cos(angle/2)]
+    point2 = [round3(2*math.sin(angle/2)), 0]
+    point3 = [round3(math.sin(angle/2)), round3(math.cos(angle/2))]
 
     triangleCoordinates = np.zeros((3,2*N))
     boundary = np.zeros((3, 2))
@@ -113,9 +113,9 @@ def generateIndividualTriangle(boundary, edge, angle):
     AB = point2 - point1
     Midpoint = point1 + 1/2*point2
     alpha = math.acos(AB[0]/norm(AB))
-    e = [math.cos(math.pi/2 + alpha), math.sin(math.pi/2 + alpha)]
-    magnitude = 1/2 * norm(AB) / math.tan(angle/2)
-    v = magnitude*e
+    e = [round3(math.cos(math.pi/2 + alpha)), round3(math.sin(math.pi/2 + alpha))]
+    magnitude = round3(1/2 * norm(AB) / math.tan(angle/2))
+    v = round3(magnitude*e)
 
     # try first orientation
     point3 = Midpoint + v

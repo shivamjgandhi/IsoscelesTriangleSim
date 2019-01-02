@@ -74,4 +74,7 @@ def round3(number):
     :param number:
     :return: rounded number
     """
-    return round(number, 3)
+    if type(number) is float:
+        return round(number, 3)
+    elif type(number) is list:
+        return [round(elem, 3) for elem in number]
