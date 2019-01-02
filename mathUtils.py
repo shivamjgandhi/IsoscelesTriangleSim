@@ -1,7 +1,6 @@
 import numpy as np
 import math
 
-
 def toRadians(angle):
     """
     Returns radians instead of degrees for angle
@@ -10,7 +9,6 @@ def toRadians(angle):
     """
     return angle*math.pi/180
 
-
 def norm(vector):
     """
     Returns the norm of a vector
@@ -18,7 +16,6 @@ def norm(vector):
     :return: norm
     """
     return math.sqrt(vector[0]*vector[0] + vector[1]*vector[1])
-
 
 def intersection(boundary, triangle, edge):
     """
@@ -32,6 +29,7 @@ def intersection(boundary, triangle, edge):
     isIntersection = False
     b = boundary.shape[1]
     for i in range(0, b):
+        print('look here: ', boundary)
         point1 = boundary[0:2, b]
         point2 = boundary[0:2, b+1]
         mBoundary = (point2[1]-point1[1])/(point2[0] - point1[0])

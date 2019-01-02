@@ -106,11 +106,10 @@ def generateIndividualTriangle(boundary, edge, angle):
     :param angle: the angle of the isosceles triangle
     :return: the coordinates of the new triangle object
     """
-    print(boundary)
     b = boundary.shape[0]
     angle = toRadians(angle)
-    point1 = boundary[edge]
-    point2 = boundary[(edge+1) % b]
+    point1 = boundary[edge-1]
+    point2 = boundary[edge % b]
     AB = point2 - point1
     Midpoint = point1 + 1/2*point2
     alpha = math.acos(AB[0]/norm(AB))
@@ -137,3 +136,7 @@ def generateIndividualTriangle(boundary, edge, angle):
     # In the case that neither side works, return false
     if not added:
         return False
+    else:
+        # add to the boundary
+        #
+        return boundary
