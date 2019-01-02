@@ -37,5 +37,6 @@ class mathUtilsTest(unittest.TestCase):
     #def testIntersection(self):
         # boundary, triangle, edge
 
+
 if __name__ == '__main__':
     unittest.main()

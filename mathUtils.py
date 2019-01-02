@@ -67,3 +67,11 @@ def intersection(boundary, triangle, edge):
                 isIntersection = True
 
     return isIntersection
+
+def round3(number):
+    """
+    Returns a number rounded to 3 digits
+    :param number:
+    :return: rounded number
+    """
+    return round(number, 3)
