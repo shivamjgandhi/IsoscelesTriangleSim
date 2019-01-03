@@ -126,6 +126,10 @@ def generateIndividualTriangle(boundary, edge, angle):
     newTriangle = triangle(coordinates)
     # added = intersection(boundary, newTriangle, edge)
     added = True
+    for i in range(0, 3):
+        point = coordinates[i]
+        if point not in boundary:
+            boundary = np.append(boundary, [point], axis=0)
 
     # try second orientation
     if not added:
@@ -139,5 +143,4 @@ def generateIndividualTriangle(boundary, edge, angle):
         return False
     else:
         # add to the boundary
-
         return boundary

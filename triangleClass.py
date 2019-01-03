@@ -16,6 +16,9 @@ class triangle:
     def __init__(self, coordinates):
         self.coordinates = coordinates
 
+    def setCoordinates(self, coordinates):
+        self.coordinates = coordinates
+
 class boundaryObject:
     def __init__(self, boundary, triangleCount):
         """
