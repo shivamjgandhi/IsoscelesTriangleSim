@@ -1,5 +1,6 @@
 import numpy as np
 import math
+from triangleClass import *
 
 def toRadians(angle):
     """
@@ -17,53 +18,44 @@ def norm(vector):
     """
     return math.sqrt(vector[0]*vector[0] + vector[1]*vector[1])
 
-def intersection(boundary, triangle):
+def pointSlopeForm(point1, point2):
+    """
+    Returns the point slope form of a line between 2 points
+    :param point1: The first point
+    :param point2: The second point
+    :return: The slope, m, and the y intercept, b
+    """
+    m = (point2[1] - point1[1])/(point2[0] - point1[0])
+    b = point1[1] - m*point1[0]
+    return round3(m), round3(b)
+
+def intersection(boundary, addedTriangle):
     """
     Tells whether or not the new triangle intersects the boundary
 
     :param boundary: the boundary of the shape created so far
-    :param triangle: 3x2 array with the 3 points of the triangle
+    :param addedTriangle: a triangle object
     :return isIntersection: tells whether or not the new triangle intersects the boundary
     """
     isIntersection = False
-    b = boundary.shape[1]
+    b = boundary.shape[0]
+    sameEdges = []
     for i in range(0, b):
-        print('look here: ', boundary)
-        point1 = boundary[0:2, b]
-        point2 = boundary[0:2, b+1]
-        mBoundary = (point2[1]-point1[1])/(point2[0] - point1[0])
-        bBoundary = point1[1] - mBoundary*point1[0]
-        # Check if line 1 intersects
-        m1 = (triangle[0][1] - triangle[1][1])/(triangle[0][0] - triangle[1][0])
-        b1 = triangle[0][1] - m1*triangle[0][0]
-        if m1 == mBoundary:
-            print('Matching slopes')
-            # initiate sequence that checks whether it's the same line or not
-        else:
-            x = - (bBoundary - b1)/(mBoundary - m1)
-            if (x < triangle[0][0]) or (x > triangle[1][0]):
-                isIntersection = True
-
-        # Check if line 2 intersects
-        m2 = (triangle[1][1] - triangle[2][1])/(triangle[1][0] - triangle[2][0])
-        b2 = triangle[1][1] - m2*triangle[1][0]
-        if m2 == mBoundary:
-            print('Matching slope')
-        else:
-            x = - (bBoundary - b2)/(mBoundary - m2)
-            if (x < triangle[1][0]) or (x > triangle[2][0]):
-                isIntersection = True
-
-        # Check if line 3 intersects
-        m3 = (triangle[2][1] - triangle[0][1])/(triangle[2][0] - triangle[0][0])
-        b3 = triangle[2][1] - m3*triangle[2][0]
-        if m3 == mBoundary:
-            print('Matching slope')
-        else:
-            x = -(bBoundary - b3)/(mBoundary - m3)
-            if (x < triangle[2][0]) or (x > triangle[0][0]):
-                isIntersection = True
-
+        point1 = boundary[b]
+        point2 = boundary[(b + 1) % b]
+        # Compute the point slope form of the boundary that we're adding onto
+        mBoundary, bBoundary = pointSlopeForm(point1, point2)
+        for j in range(0, 3):
+            # Check if line 1 intersects
+            m, b = pointSlopeForm(addedTriangle.coordinates[j], addedTriangle.coordinates[(j+1) % 3])
+            if m == mBoundary:
+                print('Matching slopes')
+                if bBoundary == b:
+                    sameEdges = sameEdges + [1]
+            else:
+                x = - (bBoundary - b)/(mBoundary - m)
+                if (x < addedTriangle.coordinates[j][0]) or (x > addedTriangle.coordinates[(j+1) % 3][0]):
+                    isIntersection = True
     return isIntersection
 
 def round3(number):

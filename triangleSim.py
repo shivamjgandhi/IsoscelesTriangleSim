@@ -26,6 +26,5 @@ def main():
     triangleCoordinates = generateTriangles(angle, N)
     drawTriangles(triangleCoordinates).show()
 
-
 if __name__ == '__main__':
     main()
