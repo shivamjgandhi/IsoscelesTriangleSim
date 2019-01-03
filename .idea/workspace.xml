@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="14464fe2-7ab8-4068-ae33-78efe3575590" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/mathUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/mathUtils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/testing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/triangleSim.py" beforeDir="false" afterPath="$PROJECT_DIR$/triangleSim.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,8 +53,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mathUtils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
+            <state relative-caret-position="837">
+              <caret line="61" column="17" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -214,12 +212,12 @@
       <workItem from="1546351968579" duration="340000" />
       <workItem from="1546405654426" duration="3397000" />
       <workItem from="1546418613219" duration="1414000" />
-      <workItem from="1546491626937" duration="4605000" />
+      <workItem from="1546491626937" duration="5030000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27663000" />
+    <option name="totallyTimeSpent" value="28088000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -329,8 +327,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mathUtils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
+        <state relative-caret-position="837">
+          <caret line="61" column="17" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

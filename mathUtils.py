@@ -56,6 +56,10 @@ def intersection(boundary, addedTriangle):
                 x = - (bBoundary - b)/(mBoundary - m)
                 if (x < addedTriangle.coordinates[j][0]) or (x > addedTriangle.coordinates[(j+1) % 3][0]):
                     isIntersection = True
+        if sum(sameEdges) == 3:
+            isIntersection = True
+        if isIntersection:
+            break
     return isIntersection
 
 def round3(number):
