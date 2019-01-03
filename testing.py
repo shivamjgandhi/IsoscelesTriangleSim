@@ -17,8 +17,8 @@ class UtilsTest(unittest.TestCase):
         angle = 60
         newBoundary = generateIndividualTriangle(boundary, edge, angle)
         areEqual = np.array_equal(newBoundary, [[0.0, 0.0],
-                                             [1.0, 0.0],
-                                             [0.5, 0.866]])
+                                                [1.0, 0.0],
+                                                [0.5, 0.866]])
         print("The first boundary for the 60 degree triangles is: ", areEqual)
 
         angle = 90
@@ -26,7 +26,7 @@ class UtilsTest(unittest.TestCase):
         areEqual = np.array_equal(boundary, [[0.0, 0.0],
                                              [1.0, 0.0],
                                              [0.5, 0.5]])
-        print("The first boundary for the 45 degree triangles is: ", areEqual)
+        print("The first boundary for the 90 degree triangles is: ", areEqual)
 
 
 class mathUtilsTest(unittest.TestCase):
@@ -43,7 +43,7 @@ class mathUtilsTest(unittest.TestCase):
         self.assertEqual(norm([0, 1]), 1)
         print('all norm test passed')
 
-    # def testIntersection(self):
+    def testIntersection(self):
     # boundary, triangle, edge
 
 
