@@ -80,5 +80,9 @@ class triangleClassTest(unittest.TestCase):
         self.assertEqual(newBoundary.boundary, newTriangle.coordinates)
         self.assertEqual(newBoundary.triangleCount, 1)
 
+    # TODO
+    # def boundaryTest(self):
+
+
 if __name__ == '__main__':
     unittest.main()

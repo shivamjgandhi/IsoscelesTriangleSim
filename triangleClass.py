@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class randomPacking:
     def __init__(self, boundary, triangleCount, triangleList):
         """
@@ -12,12 +13,14 @@ class randomPacking:
         self.triangleCount = triangleCount
         self.triangleList = triangleList
 
+
 class triangle:
     def __init__(self, coordinates):
         self.coordinates = coordinates
 
     def setCoordinates(self, coordinates):
         self.coordinates = coordinates
+
 
 class boundaryObject:
     def __init__(self, boundary=None, triangleCount=None):
@@ -35,18 +38,25 @@ class boundaryObject:
     def setTriangleCount(self, count):
         self.triangleCount = count
 
-    def insertTriangle(self, triangle, edge):
+    def insertTriangle(self, addedTriangle, edge):
         """
         Inserts a valid triangle onto the object and updates the boundary accordingly
-        :param triangle: triangle to insert
+        :param addedTriangle: triangle to insert
         :param edge: edge to insert onto
         :return: the updated boundary and triangle count
         """
         # Return the actual edge
-        # TODO
-        edgePoint1, edgePoint2 = self.boundary[edge-1], self.boundary[edge % (self.triangleCount + 2)]
+        edgePoint1, edgePoint2 = self.boundary[edge], self.boundary[(edge + 1) % (self.triangleCount + 2)]
+        addedPoint = None
+        for i in range(0, 3):
+            if not np.array_equal(addedTriangle.coordinates[i], edgePoint1) and \
+                    not np.array_equal(addedTriangle.coordinates[i], edgePoint2):
+                addedPoint = addedTriangle.coordinates[i]
+        newBoundary = self.boundary[:edge] + [addedPoint] + self.boundary[(edge+1):]
+
         self.triangleCount += 1
+        self.boundary = newBoundary
 
     def removeEdge(self, edge):
         # TODO
-        self.boundary = np.array(self.boundary[:edge], self.boundary[edge+1:])
+        self.boundary = np.array(self.boundary[:edge], self.boundary[edge + 1:])
