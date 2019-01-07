@@ -29,20 +29,21 @@ def pointSlopeForm(point1, point2):
     b = point1[1] - m*point1[0]
     return round3(m), round3(b)
 
-def intersection(boundary, addedTriangle):
+def intersection(addedBoundary, addedTriangle):
     """
     Tells whether or not the new triangle intersects the boundary
 
-    :param boundary: the boundary of the shape created so far
+    :param addedBoundary: the boundary object of the shape created so far
     :param addedTriangle: a triangle object
     :return isIntersection: tells whether or not the new triangle intersects the boundary
     """
     isIntersection = False
-    b = boundary.shape[0]
+    boundary = addedBoundary.boundary
+    b = np.asarray(boundary).shape[0]
     sameEdges = []
     for i in range(0, b):
-        point1 = boundary[b]
-        point2 = boundary[(b + 1) % b]
+        point1 = boundary[i]
+        point2 = boundary[(i + 1) % b]
         # Compute the point slope form of the boundary that we're adding onto
         mBoundary, bBoundary = pointSlopeForm(point1, point2)
         for j in range(0, 3):
