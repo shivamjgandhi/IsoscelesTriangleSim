@@ -51,6 +51,8 @@ def generateTriangles(angle, N):
     triangleCoordinates[1] = point2
     triangleCoordinates[2] = point3
     print(triangleCoordinates[2], point3)
+
+    # TODO
     """
     firstTriangle = triangle(triangleCoordinates)
 
@@ -136,7 +138,7 @@ def generateIndividualTriangle(boundary, edge, angle):
         point3 = Midpoint - v
         coordinates[2] = point3
         newTriangle.setCoordinates(coordinates)
-        added = intersection(boundary, newTriangle, edge)
+        added = intersection(boundary, newTriangle)
 
     # In the case that neither side works, return false
     if not added:

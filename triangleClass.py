@@ -43,8 +43,10 @@ class boundaryObject:
         :return: the updated boundary and triangle count
         """
         # Return the actual edge
+        # TODO
         edgePoint1, edgePoint2 = self.boundary[edge-1], self.boundary[edge % (self.triangleCount + 2)]
         self.triangleCount += 1
 
     def removeEdge(self, edge):
+        # TODO
         self.boundary = np.array(self.boundary[:edge], self.boundary[edge+1:])
