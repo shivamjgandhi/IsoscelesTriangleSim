@@ -48,6 +48,11 @@ class mathUtilsTest(unittest.TestCase):
         newBoundary.setBoundary([[0.0, 0.0],
                                  [1.0, 0.0],
                                  [0.5, 0.5]])
+        newBoundary.setTriangleCount(1)
+        newTriangle = triangle([[0.0, 0.0],
+                                [1.0, 0.0],
+                                [0.5, 0.5]])
+        self.assertEqual(intersection(newBoundary, newTriangle), True)
 
 
 class triangleClassTest(unittest.TestCase):
