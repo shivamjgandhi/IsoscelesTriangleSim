@@ -28,7 +28,6 @@ class UtilsTest(unittest.TestCase):
                                              [0.5, 0.5]])
         print("The first boundary for the 90 degree triangles is: ", areEqual)
 
-
 class mathUtilsTest(unittest.TestCase):
 
     def testToRadians(self):
@@ -53,20 +52,19 @@ class mathUtilsTest(unittest.TestCase):
         newTriangle = triangle([[0.0, 0.0],
                                 [1.0, 0.0],
                                 [0.5, 0.5]])
-        # self.assertEqual(intersection(newBoundary, newTriangle), True)
+        self.assertEqual(intersection(newBoundary, newTriangle), True)
 
         # Now test when the triangles actually intersect
         newTriangle.setCoordinates([[0.0, 0.0],
                                     [1.0, 0.0],
                                     [1.0, 0.5]])
-        # self.assertEqual(intersection(newBoundary, newTriangle), True)
+        self.assertEqual(intersection(newBoundary, newTriangle), True)
 
         # Finally test when the triangles don't intersect
         newTriangle.setCoordinates([[1.0, 1.0],
                                     [2.0, 1.0],
                                     [1.5, 1.5]])
         self.assertEqual(intersection(newBoundary, newTriangle), False)
-
 
 class triangleClassTest(unittest.TestCase):
 
@@ -81,7 +79,6 @@ class triangleClassTest(unittest.TestCase):
         newBoundary = boundaryObject(newTriangle.coordinates, 1)
         self.assertEqual(newBoundary.boundary, newTriangle.coordinates)
         self.assertEqual(newBoundary.triangleCount, 1)
-
 
 if __name__ == '__main__':
     unittest.main()
