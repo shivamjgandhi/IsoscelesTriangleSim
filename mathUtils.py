@@ -43,12 +43,11 @@ def intersection(addedBoundary, addedTriangle):
     """
     isIntersection = False
     boundary = addedBoundary.boundary
-    b = np.asarray(boundary).shape[0]
-    print(type(b))
+    dim = np.asarray(boundary).shape[0]
     sameEdges = []
-    for i in range(0, b):
+    for i in range(0, dim):
         point1 = boundary[i]
-        point2 = boundary[(i + 1) % int(b)]
+        point2 = boundary[(i + 1) % dim]
         # Compute the point slope form of the boundary that we're adding onto
         mBoundary, bBoundary = pointSlopeForm(point1, point2)
         for j in range(0, 3):
