@@ -45,6 +45,7 @@ class mathUtilsTest(unittest.TestCase):
 
     def testIntersection(self):
         newBoundary = boundaryObject()
+        # First test when the triangles match
         newBoundary.setBoundary([[0.0, 0.0],
                                  [1.0, 0.0],
                                  [0.5, 0.5]])
@@ -53,6 +54,17 @@ class mathUtilsTest(unittest.TestCase):
                                 [1.0, 0.0],
                                 [0.5, 0.5]])
         self.assertEqual(intersection(newBoundary, newTriangle), True)
+
+        # Now test when the triangles actually intersect
+        newTriangle.setCoordinates([[0.0, 0.0],
+                                    [1.0, 0.0],
+                                    [1.0, 0.5]])
+        self.assertEqual(intersection(newBoundary, newTriangle), True)
+
+        # Finally test when the triangles don't intersect
+        newTriangle.setCoordinates([[1.0, 1.0],
+                                    [2.0, 1.0],
+                                    [1.5, 1.5]])
 
 
 class triangleClassTest(unittest.TestCase):
