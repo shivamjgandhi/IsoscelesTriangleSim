@@ -25,8 +25,12 @@ def pointSlopeForm(point1, point2):
     :param point2: The second point
     :return: The slope, m, and the y intercept, b
     """
-    m = (point2[1] - point1[1])/(point2[0] - point1[0])
-    b = point1[1] - m*point1[0]
+    if point2[0] == point1[0]:
+        m = (point2[1] - point1[1])/0.001
+        b = point1[1] - m*point1[0]
+    else:
+        m = (point2[1] - point1[1]) / (point2[0] - point1[0])
+        b = point1[1] - m * point1[0]
     return round3(m), round3(b)
 
 def intersection(addedBoundary, addedTriangle):
@@ -40,10 +44,11 @@ def intersection(addedBoundary, addedTriangle):
     isIntersection = False
     boundary = addedBoundary.boundary
     b = np.asarray(boundary).shape[0]
+    print(type(b))
     sameEdges = []
     for i in range(0, b):
         point1 = boundary[i]
-        point2 = boundary[(i + 1) % b]
+        point2 = boundary[(i + 1) % int(b)]
         # Compute the point slope form of the boundary that we're adding onto
         mBoundary, bBoundary = pointSlopeForm(point1, point2)
         for j in range(0, 3):
@@ -55,7 +60,7 @@ def intersection(addedBoundary, addedTriangle):
                     sameEdges = sameEdges + [1]
             else:
                 x = - (bBoundary - b)/(mBoundary - m)
-                if (x < addedTriangle.coordinates[j][0]) or (x > addedTriangle.coordinates[(j+1) % 3][0]):
+                if (x < addedTriangle.coordinates[j][0]) and (x > addedTriangle.coordinates[(j+1) % 3][0]):
                     isIntersection = True
         if sum(sameEdges) == 3:
             isIntersection = True
