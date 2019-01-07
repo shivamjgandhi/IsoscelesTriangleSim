@@ -43,8 +43,11 @@ class mathUtilsTest(unittest.TestCase):
         self.assertEqual(norm([0, 1]), 1)
         print('all norm test passed')
 
-    # def testIntersection(self):
-    # boundary, triangle, edge
+    def testIntersection(self):
+        newBoundary = boundaryObject()
+        newBoundary.setBoundary([[0.0, 0.0],
+                                 [1.0, 0.0],
+                                 [0.5, 0.5]])
 
 
 class triangleClassTest(unittest.TestCase):

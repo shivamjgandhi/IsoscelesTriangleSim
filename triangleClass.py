@@ -20,7 +20,7 @@ class triangle:
         self.coordinates = coordinates
 
 class boundaryObject:
-    def __init__(self, boundary, triangleCount):
+    def __init__(self, boundary=None, triangleCount=None):
         """
         Creates an object that defines the boundaries of the packing
         :param boundary: the boundary is a numpy array defining the external boundary of the object
@@ -28,6 +28,12 @@ class boundaryObject:
         """
         self.boundary = boundary
         self.triangleCount = triangleCount
+
+    def setBoundary(self, boundary):
+        self.boundary = boundary
+
+    def setTriangleCount(self, count):
+        self.triangleCount = count
 
     def insertTriangle(self, triangle, edge):
         """
