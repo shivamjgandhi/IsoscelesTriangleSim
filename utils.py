@@ -130,20 +130,27 @@ def generateProposalCoordinates(edge, packing, angle):
     point1 = boundary[edge - 1]
     point2 = boundary[edge % len(boundary)]
     AB = point2 - point1
-    Midpoint = point1 + 1 / 2 * point2
-    alpha = math.acos(AB[0] / norm(AB))
-    e = [round3(math.cos(math.pi / 2 + alpha)), round3(math.sin(math.pi / 2 + alpha))]
-    magnitude = round3(1 / 2 * norm(AB) / math.tan(angle / 2))
-    v = round3([magnitude * elem for elem in e])
+    if norm(AB) == 1:
+        # When we're adding onto the edge opposite the angle of interest
+        Midpoint = point1 + 1 / 2 * point2
+        alpha = math.acos(AB[0] / norm(AB))
+        e = [round3(math.cos(math.pi / 2 + alpha)), round3(math.sin(math.pi / 2 + alpha))]
+        magnitude = round3(1 / 2 * norm(AB) / math.tan(angle / 2))
+        v = round3([magnitude * elem for elem in e])
 
-    # first proposal
-    point3 = Midpoint + v
-    coordinates = np.asarray([point1, point2, point3])
-    proposal1 = triangle(coordinates, None)
+        # first proposal
+        point3 = Midpoint + v
+        coordinates = np.asarray([point1, point2, point3])
+        proposal1 = triangle(coordinates, None)
 
-    # second proposal
-    point3 = Midpoint - v
-    coordinates = np.asarray([point1, point2, point3])
-    proposal2 = triangle(coordinates, None)
+        # second proposal
+        point3 = Midpoint - v
+        coordinates = np.asarray([point1, point2, point3])
+        proposal2 = triangle(coordinates, None)
 
-    return proposal1, proposal2
+        proposals = [proposal1, proposal2]
+    else:
+        # When we're adding onto one of the isosceles sides
+
+
+    return proposals
