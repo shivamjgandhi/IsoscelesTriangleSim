@@ -7,7 +7,6 @@ from triangleClass import *
 
 from mathUtils import *
 
-
 def newline(p1, p2):
     """
     This function creates a new line through p1 and p2 spanning the whole plot
@@ -31,58 +30,39 @@ def newline(p1, p2):
     return l
 
 
-def generateTriangles(angle, N):
+def generateTriangles(angle, N, method):
     """
     Generates N isosceles triangles in a monte-carlo fashion to create a random packing
+    :param method: the method by which we're generating the triangles, a string
     :param angle: the main angle of the isosceles triangles being simulated
     :param N: The number of triangles to be generated
-    :return: triangleCoordinates: the coordinates of the N acute triangle's points
+    :return packing: The randomPacking of the total object, a randomPacking object
     """
     angle = toRadians(angle)
     # generate the first triangle
     point1 = [0, 0]
-    point2 = [round3(2*math.sin(angle/2)), 0]
-    point3 = [round3(math.sin(angle/2)), round3(math.cos(angle/2))]
+    point2 = [round3(2 * math.sin(angle / 2)), 0]
+    point3 = [round3(math.sin(angle / 2)), round3(math.cos(angle / 2))]
 
-    triangleCoordinates = np.zeros((3,2*N))
-    boundary = np.zeros((3, 2))
-
-    triangleCoordinates[0] = point1
-    triangleCoordinates[1] = point2
-    triangleCoordinates[2] = point3
-    print(triangleCoordinates[2], point3)
-
-    # TODO
-    """
-    firstTriangle = triangle(triangleCoordinates)
+    triangleCoordinates = np.asarray([point1, point2, point3])
+    firstTriangle = triangle(triangleCoordinates, 1)
+    packing = randomPacking(firstTriangle, 1, [firstTriangle])
 
     # Generate the other N-1 triangles
     for i in range(2, N):
-        # Select line on boundary on which to add new triangle, try to add new triangle
-        b = boundary.shape[0]
-        addedTriangle = False
-        while not addedTriangle:
-            edge = randint((0, b))
-            triangle = generateIndividualTriangle(boundary, edge)
+        packing = generateIndividualTriangle(packing, angle, method)
 
-            if not intersection(boundary, triangle):
-                addedTriangle = True
-
-
-        # Update boundary
-        
-    """
-
-    return triangleCoordinates
+    return packing
 
 
 def drawTriangles(coordinates):
     """
-
+    Returns a matplotlib object with the drawing of all of the triangles
     :param coordinates: The triples containing the coordinates of the triangles's points.
     An 3x2*N array where N is the number of triangles
     :return:
     """
+    # TODO
     N = int(coordinates.shape[1]/2)
     print(N)
     for j in range(0, N):
@@ -99,7 +79,7 @@ def drawTriangles(coordinates):
     return plt
 
 
-def generateIndividualTriangle(boundary, edge, angle):
+def generateIndividualTriangle(packing, angle, method):
     """
     Generates an individual triangle based on the existing boundary and the edge we want to add the triangle to
 
@@ -108,24 +88,14 @@ def generateIndividualTriangle(boundary, edge, angle):
     :param angle: the angle of the isosceles triangle
     :return: the coordinates of the new triangle object
     """
-    b = boundary.shape[0]
-    angle = toRadians(angle)
-    point1 = boundary[edge-1]
-    point2 = boundary[edge % b]
-    AB = point2 - point1
-    Midpoint = point1 + 1/2*point2
-    alpha = math.acos(AB[0]/norm(AB))
-    e = [round3(math.cos(math.pi/2 + alpha)), round3(math.sin(math.pi/2 + alpha))]
-    magnitude = round3(1/2 * norm(AB) / math.tan(angle/2))
-    v = round3([magnitude*elem for elem in e])
+    notAdded = True
+    while notAdded:
+        randomEdge = packing.generateRandomEdge(method)
+        proposal1, proposal2 = packing.generateProposalCoordinates(randomEdge, packing, angle)
+        intersection1 = intersection(proposal1, packing, randomEdge)
+        intersection2 = intersection(proposal2, packing, randomEdge)
 
-    # try first orientation
-    point3 = Midpoint + v
-    coordinates = np.zeros((3,2))
-    coordinates[0] = point1
-    coordinates[1] = point2
-    coordinates[2] = point3
-    newTriangle = triangle(coordinates)
+
     # added = intersection(boundary, newTriangle, edge)
     added = True
     for i in range(0, 3):
@@ -146,3 +116,34 @@ def generateIndividualTriangle(boundary, edge, angle):
     else:
         # add to the boundary
         return boundary
+
+def generateProposalCoordinates(edge, packing, angle):
+    """
+
+    :param edge: the edge that we're adding onto, an int
+    :param packing: the total packing, a packing object
+    :param angle: the angle of the triangle, a float
+    :return proposal1, proposal2: the two proposal triangles, triangle objects
+    """
+    boundary = packing.boundary
+    angle = toRadians(angle)
+    point1 = boundary[edge - 1]
+    point2 = boundary[edge % len(boundary)]
+    AB = point2 - point1
+    Midpoint = point1 + 1 / 2 * point2
+    alpha = math.acos(AB[0] / norm(AB))
+    e = [round3(math.cos(math.pi / 2 + alpha)), round3(math.sin(math.pi / 2 + alpha))]
+    magnitude = round3(1 / 2 * norm(AB) / math.tan(angle / 2))
+    v = round3([magnitude * elem for elem in e])
+
+    # first proposal
+    point3 = Midpoint + v
+    coordinates = np.asarray([point1, point2, point3])
+    proposal1 = triangle(coordinates, None)
+
+    # second proposal
+    point3 = Midpoint - v
+    coordinates = np.asarray([point1, point2, point3])
+    proposal2 = triangle(coordinates, None)
+
+    return proposal1, proposal2

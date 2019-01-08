@@ -33,9 +33,9 @@ def pointSlopeForm(point1, point2):
         b = point1[1] - m * point1[0]
     return round3(m), round3(b)
 
-def intersection(addedBoundary, addedTriangle):
+def intersection(addedBoundary, addedTriangle, packing):
     """
-    Tells whether or not the new triangle intersects the boundary
+    Tells whether or not the new triangle intersects any of the other triangles in the packing
 
     :param addedBoundary: the boundary object of the shape created so far
     :param addedTriangle: a triangle object

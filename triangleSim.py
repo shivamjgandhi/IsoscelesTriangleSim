@@ -6,7 +6,6 @@ import os
 from utils import *
 from mathUtils import *
 
-
 def arg_parse():
     """
     :return: Arguments for triangle simulation
@@ -20,12 +19,14 @@ def arg_parse():
 
 
 def main():
+    """
+    The main operation to see a random packing
+    """
     args = arg_parse()
     angle = args.angle
     N = args.N
-    triangleCoordinates = generateTriangles(angle, N)
+    triangleCoordinates = generateTriangles(angle, N, 'uniform')
     drawTriangles(triangleCoordinates).show()
-    # TODO
 
 if __name__ == '__main__':
     main()
