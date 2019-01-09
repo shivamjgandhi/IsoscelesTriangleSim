@@ -59,7 +59,7 @@ def triangleIntersection(triangle1, triangle2):
     :param triangle2: a triangle object
     :return intersection: whether or not the triangles intersect
     """
-    intersection = False
+    individualIntersection = False
     sameEdges = 0
     for i in range(0,3):
         for j in range(i, 3):
@@ -78,32 +78,13 @@ def triangleIntersection(triangle1, triangle2):
                 sameEdges += 1
             else:
                 x = - (b2 - b1)/(m2 - m1)
+                if (x < point11[0]) and (x > point12[0]):
+                    individualIntersection = True
+                    break
+    if sameEdges == 3:
+        individualIntersection = True
 
-
-            # Compute the point slope form of the second line
-
-    sameEdges = []
-    for i in range(0, dim):
-        point1 = boundary[i]
-        point2 = boundary[(i + 1) % dim]
-        # Compute the point slope form of the boundary that we're adding onto
-        mBoundary, bBoundary = pointSlopeForm(point1, point2)
-        for j in range(0, 3):
-            # Check if line 1 intersects
-            m, b = pointSlopeForm(addedTriangle.coordinates[j], addedTriangle.coordinates[(j+1) % 3])
-            if m == mBoundary:
-                print('Matching slopes')
-                if bBoundary == b:
-                    sameEdges = sameEdges + [1]
-            else:
-                x = - (bBoundary - b)/(mBoundary - m)
-                if (x < addedTriangle.coordinates[j][0]) and (x > addedTriangle.coordinates[(j+1) % 3][0]):
-                    isIntersection = True
-        if sum(sameEdges) == 3:
-            isIntersection = True
-        if isIntersection:
-            break
-    return intersections
+    return individualIntersection
 
 def round3(number):
     """
