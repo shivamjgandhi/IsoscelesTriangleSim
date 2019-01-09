@@ -151,6 +151,21 @@ def generateProposalCoordinates(edge, packing, angle):
         proposals = [proposal1, proposal2]
     else:
         # When we're adding onto one of the isosceles sides
+        if AB[0] == 0:
+            gamma = math.pi/2
+        else:
+            gamma = math.atan(AB[1]/AB[0])
+        theta1 = math.pi - angle + gamma
+        theta2 = math.pi - angle - gamma
+        C = [AB + norm(AB) * [math.cos(theta1), math.sin(theta1)],
+             AB + norm(AB) * [math.cos(theta1), -math.sin(theta1)],
+             AB + norm(AB) * [-math.cos(theta2), math.sin(theta2)],
+             AB + norm(AB) * [-math.cos(theta2), -math.sin(theta2)]]
 
+        proposals = []
+        for i in range(0, 4):
+            coordinates = np.asarra
+            newTriangle = triangle
+            proposals.append(newTriangle)
 
     return proposals
