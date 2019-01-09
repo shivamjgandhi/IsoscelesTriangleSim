@@ -33,14 +33,33 @@ def pointSlopeForm(point1, point2):
         b = point1[1] - m * point1[0]
     return round3(m), round3(b)
 
-def intersection(addedBoundary, addedTriangle, packing):
+def intersection(proposals, packing, randomEdge):
     """
     Tells whether or not the new triangle intersects any of the other triangles in the packing
 
-    :param addedBoundary: the boundary object of the shape created so far
-    :param addedTriangle: a triangle object
-    :return isIntersection: tells whether or not the new triangle intersects the boundary
+    :param proposals: the proposal triangles that could be added to the packing, a list of triangle objects
+    :param packing: the existing packing with all of its triangles, a packing object
+    :param randomEdge: the edge that the propsal triangles are trying out for, an int
+    :return intersections: tells which of the new proposal triangles intersects the existing
+    packing triangles, a list of booleans
     """
+    intersections = [False]*len(proposals)
+
+    # Go through each triangle in the packing and check to make sure there isn't an intersection
+    for i in range(0, packing.triangleCount):
+        for j in range(0, 4):
+            intersections[j] = triangleIntersection(packing.triangleList[i], proposals[j])
+
+    return intersections
+
+def triangleIntersection(triangle1, triangle2):
+    """
+
+    :param triangle1: a triangle object
+    :param triangle2: a triangle object
+    :return intersection: whether or not the triangles intersect
+    """
+
     isIntersection = False
     boundary = addedBoundary.boundary
     dim = np.asarray(boundary).shape[0]
@@ -65,7 +84,7 @@ def intersection(addedBoundary, addedTriangle, packing):
             isIntersection = True
         if isIntersection:
             break
-    return isIntersection
+    return intersections
 
 def round3(number):
     """
