@@ -51,7 +51,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mathUtils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
+            <state relative-caret-position="2838">
               <caret line="86" column="33" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -218,12 +218,12 @@
       <workItem from="1546928062701" duration="140000" />
       <workItem from="1546954249668" duration="3926000" />
       <workItem from="1547029600158" duration="3524000" />
-      <workItem from="1547047131883" duration="1478000" />
+      <workItem from="1547047131883" duration="1797000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43750000" />
+    <option name="totallyTimeSpent" value="44069000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -236,7 +236,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="3266" height="2106" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13134518" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -346,7 +345,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mathUtils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
+        <state relative-caret-position="2838">
           <caret line="86" column="33" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
