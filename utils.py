@@ -157,15 +157,15 @@ def generateProposalCoordinates(edge, packing, angle):
             gamma = math.atan(AB[1]/AB[0])
         theta1 = math.pi - angle + gamma
         theta2 = math.pi - angle - gamma
-        C = [AB + norm(AB) * [math.cos(theta1), math.sin(theta1)],
+        C = [[AB + norm(AB) * [math.cos(theta1), math.sin(theta1)],
              AB + norm(AB) * [math.cos(theta1), -math.sin(theta1)],
              AB + norm(AB) * [-math.cos(theta2), math.sin(theta2)],
-             AB + norm(AB) * [-math.cos(theta2), -math.sin(theta2)]]
+             AB + norm(AB) * [-math.cos(theta2), -math.sin(theta2)]]]
 
         proposals = []
         for i in range(0, 4):
-            coordinates = np.asarra
-            newTriangle = triangle
+            coordinates = np.asarray([point1, point2, C[i]])
+            newTriangle = triangle(coordinates, None)
             proposals.append(newTriangle)
 
     return proposals
