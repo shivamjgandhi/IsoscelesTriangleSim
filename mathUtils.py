@@ -59,10 +59,29 @@ def triangleIntersection(triangle1, triangle2):
     :param triangle2: a triangle object
     :return intersection: whether or not the triangles intersect
     """
+    intersection = False
+    sameEdges = 0
+    for i in range(0,3):
+        for j in range(i, 3):
+            # Compute the point slope form of the first line
+            point11 = triangle1.coordinates[i]
+            point12 = triangle1.coordinates[(i+1) % 3]
+            m1, b1 = pointSlopeForm(point11, point12)
 
-    isIntersection = False
-    boundary = addedBoundary.boundary
-    dim = np.asarray(boundary).shape[0]
+            # Compute the point slope form of the second line
+            point21 = triangle2.coordinates[j]
+            point22 = triangle2.coordinates[(j+1) % 3]
+            m2, b2 = pointSlopeForm(point21, point22)
+
+            # Check if they're the same lines
+            if m1 == m2 and b1 == b2:
+                sameEdges += 1
+            else:
+                x = - (b2 - b1)/(m2 - m1)
+
+
+            # Compute the point slope form of the second line
+
     sameEdges = []
     for i in range(0, dim):
         point1 = boundary[i]
