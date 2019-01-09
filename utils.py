@@ -133,9 +133,9 @@ def generateProposalCoordinates(edge, packing, angle):
     if norm(AB) == 1:
         # When we're adding onto the edge opposite the angle of interest
         Midpoint = point1 + 1 / 2 * point2
-        alpha = math.acos(AB[0] / norm(AB))
+        alpha = math.acos(AB[0])
         e = [round3(math.cos(math.pi / 2 + alpha)), round3(math.sin(math.pi / 2 + alpha))]
-        magnitude = round3(1 / 2 * norm(AB) / math.tan(angle / 2))
+        magnitude = round3(1 / 2 / math.tan(angle / 2))
         v = round3([magnitude * elem for elem in e])
 
         # first proposal
