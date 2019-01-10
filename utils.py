@@ -79,10 +79,10 @@ def generateIndividualTriangle(packing, angle, method):
     """
     Generates an individual triangle based on the existing boundary and the edge we want to add the triangle to
 
-    :param boundary: The existing shape's boundary, a list
-    :param edge: The edge that we're adding the triangle onto, an int
-    :param angle: the angle of the isosceles triangle
-    :return: the coordinates of the new triangle object
+    :param packing: The existing packing, a packing object
+    :param method: The method by which we're growing the triangle, a string
+    :param angle: the angle of the isosceles triangle, a float
+    :return packing: the random packing, a packing object
     """
     notAdded = True
     while notAdded:
