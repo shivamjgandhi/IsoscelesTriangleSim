@@ -55,29 +55,25 @@ def generateTriangles(angle, N, method):
     return packing
 
 
-def drawTriangles(coordinates):
+def drawTriangles(packing):
     """
     Returns a matplotlib object with the drawing of all of the triangles
-    :param coordinates: The triples containing the coordinates of the triangles's points.
-    An 3x2*N array where N is the number of triangles
-    :return:
+    :param packing: The entire packing object
+    :return plt: the image with the triangles drawn, a plt from matplotlib
     """
-    # TODO
-    N = int(coordinates.shape[1]/2)
-    print(N)
-    for j in range(0, N):
-        print(coordinates)
-        plt.plot([coordinates[0][2*j], coordinates[1][2*j]],
-                 [coordinates[0][2*j+1], coordinates[1][2*j+1]],
+    for individualTriangle in packing.triangleList:
+        coordinates = individualTriangle.coordinates
+        plt.plot([coordinates[0][0], coordinates[1][0]],
+                 [coordinates[0][1], coordinates[1][1]],
                  marker='o')
-        plt.plot([coordinates[1][2*j], coordinates[2][2*j]],
-                 [coordinates[1][2*j+1], coordinates[2][2*j+1]],
+        plt.plot([coordinates[1][0], coordinates[2][0]],
+                 [coordinates[1][1], coordinates[2][1]],
                  marker='o')
-        plt.plot([coordinates[2][2*j], coordinates[0][2*j]],
-                 [coordinates[2][2*j+1], coordinates[0][2*j+1]],
+        plt.plot([coordinates[2][0], coordinates[0][0]],
+                 [coordinates[2][1], coordinates[0][1]],
                  marker='o')
-    return plt
 
+    return plt
 
 def generateIndividualTriangle(packing, angle, method):
     """
@@ -96,7 +92,6 @@ def generateIndividualTriangle(packing, angle, method):
         if False in intersections:
             packing.insertTriangle(proposals[intersections.index(False)], randomEdge)
             notAdded = False
-
     return packing
 
 def generateProposalCoordinates(edge, packing, angle):
