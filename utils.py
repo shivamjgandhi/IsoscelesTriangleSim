@@ -47,7 +47,6 @@ def generateTriangles(angle, N, method):
     triangleCoordinates = np.asarray([point1, point2, point3])
     firstTriangle = triangle(triangleCoordinates, 1)
     packing = randomPacking(firstTriangle.coordinates, 1, [firstTriangle])
-    print(packing.boundary)
 
     # Generate the other N-1 triangles
     for i in range(2, N):
@@ -111,8 +110,7 @@ def generateProposalCoordinates(edge, packing, angle):
     if norm(AB) == 1:
         # When we're adding onto the edge opposite the angle of interest
         Midpoint = point1 + 1 / 2 * point2
-        alpha = math.acos(AB[0])
-        e = [round3(math.cos(math.pi / 2 + alpha)), round3(math.sin(math.pi / 2 + alpha))]
+        e = [-AB[1], AB[0]]
         magnitude = round3(1 / 2 / math.tan(angle / 2))
         v = round3([magnitude * elem for elem in e])
 
@@ -120,15 +118,15 @@ def generateProposalCoordinates(edge, packing, angle):
         point3 = Midpoint + v
         coordinates = np.asarray([point1, point2, point3])
         proposal1 = triangle(coordinates, None)
-        print(point3)
+        print('point3-1: ', point3)
 
         # second proposal
         point3 = Midpoint - v
         coordinates = np.asarray([point1, point2, point3])
         proposal2 = triangle(coordinates, None)
-        print(point3)
+        print('point3-2: ', point3)
 
-        print('look here: ', boundary, v, magnitude, edge, AB, alpha)
+        print('look here: ', boundary, v, magnitude, edge, AB)
 
         proposals = [proposal1, proposal2]
     else:
