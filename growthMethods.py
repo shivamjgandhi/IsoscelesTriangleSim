@@ -8,4 +8,4 @@ def uniformDist(boundary):
     :return edge: The edge to grow off of, an int
     """
     print('what the length of the boundary is: ', len(boundary))
-    return randint(0, len(boundary))
+    return randint(0, len(boundary)-1)
