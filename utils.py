@@ -47,9 +47,11 @@ def generateTriangles(angle, N, method):
     triangleCoordinates = np.asarray([point1, point2, point3])
     firstTriangle = triangle(triangleCoordinates, 1)
     packing = randomPacking(firstTriangle.coordinates, 1, [firstTriangle])
+    print('added triangle 1')
 
     # Generate the other N-1 triangles
     for i in range(2, N):
+        print('added triangle ', str(i))
         packing = generateIndividualTriangle(packing, angle, method)
 
     return packing
@@ -86,9 +88,11 @@ def generateIndividualTriangle(packing, angle, method):
     """
     notAdded = True
     while notAdded:
-        print('packing coordinates: ', packing.boundary)
+        # print('packing coordinates: ', packing.boundary)
         randomEdge = packing.generateRandomEdge(method)
         proposals = generateProposalCoordinates(randomEdge, packing, angle)
+        for elem in proposals:
+            print('coordinates: ',elem.coordinates)
         intersections = intersection(proposals, packing, randomEdge)
         if False in intersections:
             packing.insertTriangle(proposals[intersections.index(False)], randomEdge)
@@ -109,7 +113,7 @@ def generateProposalCoordinates(edge, packing, angle):
     AB = point2 - point1
     if norm(AB) == 1:
         # When we're adding onto the edge opposite the angle of interest
-        Midpoint = point1 + 1 / 2 * point2
+        Midpoint = point1 + 1 / 2 * AB
         e = [-AB[1], AB[0]]
         magnitude = round3(1 / 2 / math.tan(angle / 2))
         v = round3([magnitude * elem for elem in e])
