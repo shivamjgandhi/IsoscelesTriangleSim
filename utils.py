@@ -103,7 +103,6 @@ def generateProposalCoordinates(edge, packing, angle):
     :return proposal1, proposal2: the two proposal triangles, triangle objects
     """
     boundary = packing.boundary
-    angle = toRadians(angle)
     point1 = boundary[edge - 1]
     point2 = boundary[edge % len(boundary)]
     AB = point2 - point1
@@ -119,11 +118,15 @@ def generateProposalCoordinates(edge, packing, angle):
         point3 = Midpoint + v
         coordinates = np.asarray([point1, point2, point3])
         proposal1 = triangle(coordinates, None)
+        print(point3)
 
         # second proposal
         point3 = Midpoint - v
         coordinates = np.asarray([point1, point2, point3])
         proposal2 = triangle(coordinates, None)
+        print(point3)
+
+        print('look here: ', boundary, v, magnitude, edge, AB, alpha)
 
         proposals = [proposal1, proposal2]
     else:
