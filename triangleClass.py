@@ -39,6 +39,8 @@ class randomPacking:
             if not np.array_equal(addedTriangle.coordinates[i], edgePoint1) and \
                     not np.array_equal(addedTriangle.coordinates[i], edgePoint2):
                 addedPoint = addedTriangle.coordinates[i]
+
+        print(self.boundary, addedPoint)
         newBoundary = self.boundary[:edge] + [addedPoint] + self.boundary[(edge + 1):]
 
         self.triangleCount += 1

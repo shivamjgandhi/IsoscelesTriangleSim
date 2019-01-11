@@ -16,7 +16,7 @@ def norm(vector):
     :param vector: input vector
     :return: norm
     """
-    return math.sqrt(vector[0]*vector[0] + vector[1]*vector[1])
+    return round3(math.sqrt(vector[0]*vector[0] + vector[1]*vector[1]))
 
 def pointSlopeForm(point1, point2):
     """
@@ -47,7 +47,7 @@ def intersection(proposals, packing, randomEdge):
 
     # Go through each triangle in the packing and check to make sure there isn't an intersection
     for i in range(0, packing.triangleCount):
-        for j in range(0, 4):
+        for j in range(0, len(intersections)):
             intersections[j] = triangleIntersection(packing.triangleList[i], proposals[j])
 
     return intersections
