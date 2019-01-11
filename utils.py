@@ -47,6 +47,7 @@ def generateTriangles(angle, N, method):
     triangleCoordinates = np.asarray([point1, point2, point3])
     firstTriangle = triangle(triangleCoordinates, 1)
     packing = randomPacking(firstTriangle.coordinates, 1, [firstTriangle])
+    print(packing.boundary)
 
     # Generate the other N-1 triangles
     for i in range(2, N):
@@ -86,6 +87,7 @@ def generateIndividualTriangle(packing, angle, method):
     """
     notAdded = True
     while notAdded:
+        print('packing coordinates: ', packing.boundary)
         randomEdge = packing.generateRandomEdge(method)
         proposals = generateProposalCoordinates(randomEdge, packing, angle)
         intersections = intersection(proposals, packing, randomEdge)

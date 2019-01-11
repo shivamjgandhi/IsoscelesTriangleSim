@@ -7,4 +7,5 @@ def uniformDist(boundary):
     :param boundary: The boundary of tbe random packing, a list
     :return edge: The edge to grow off of, an int
     """
+    print('what the length of the boundary is: ', len(boundary))
     return randint(0, len(boundary))

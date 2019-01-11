@@ -33,6 +33,7 @@ class randomPacking:
         :return: the updated boundary and triangle count
         """
         # Need to handle the case where we're not actually adding on any points
+        print('adding to edge: ', edge)
         edgePoint1, edgePoint2 = self.boundary[edge], self.boundary[(edge + 1) % len(self.boundary)]
         addedPoint = None
         for i in range(0, 3):
