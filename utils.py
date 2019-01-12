@@ -108,8 +108,8 @@ def generateProposalCoordinates(edge, packing, angle):
     :return proposal1, proposal2: the two proposal triangles, triangle objects
     """
     boundary = packing.boundary
-    point1 = boundary[edge - 1]
-    point2 = boundary[edge % len(boundary)]
+    point1 = boundary[edge]
+    point2 = boundary[(edge+1) % len(boundary)]
     AB = point2 - point1
     if norm(AB) == 1:
         # When we're adding onto the edge opposite the angle of interest
