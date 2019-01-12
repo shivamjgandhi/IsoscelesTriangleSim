@@ -92,7 +92,11 @@ def round3(number):
     :param number:
     :return: rounded number
     """
-    if type(number) is float:
+    if type(number) is np.float64:
+        return np.round_(number, 3)
+    elif type(number) is float:
         return round(number, 3)
+    elif type(number) is list and type(number[0]) is np.float64:
+        return [np.round_(elem, 3) for elem in number]
     elif type(number) is list:
         return [round(elem, 3) for elem in number]
