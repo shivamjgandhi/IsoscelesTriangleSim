@@ -91,8 +91,6 @@ def generateIndividualTriangle(packing, angle, method):
         # print('packing coordinates: ', packing.boundary)
         randomEdge = packing.generateRandomEdge(method)
         proposals = generateProposalCoordinates(randomEdge, packing, angle)
-        for elem in proposals:
-            print('coordinates: ',elem.coordinates)
         intersections = intersection(proposals, packing, randomEdge)
         if False in intersections:
             packing.insertTriangle(proposals[intersections.index(False)], randomEdge)
@@ -107,11 +105,9 @@ def generateProposalCoordinates(edge, packing, angle):
     :param angle: the angle of the triangle, a float
     :return proposal1, proposal2: the two proposal triangles, triangle objects
     """
-    edge = 2
     boundary = packing.boundary
     point1 = boundary[edge]
     point2 = boundary[(edge+1) % len(boundary)]
-    print('points: ', point1, point2)
     AB = point2 - point1
     if norm(AB) == 1:
         # When we're adding onto the edge opposite the angle of interest
@@ -124,15 +120,11 @@ def generateProposalCoordinates(edge, packing, angle):
         point3 = Midpoint + v
         coordinates = np.asarray([point1, point2, point3])
         proposal1 = triangle(coordinates, None)
-        print('point3-1: ', point3)
 
         # second proposal
         point3 = Midpoint - v
         coordinates = np.asarray([point1, point2, point3])
         proposal2 = triangle(coordinates, None)
-        print('point3-2: ', point3)
-
-        print('look here: ', boundary, v, magnitude, edge, AB)
 
         proposals = [proposal1, proposal2]
     else:
@@ -143,6 +135,7 @@ def generateProposalCoordinates(edge, packing, angle):
             gamma = math.atan(AB[1]/AB[0])
         theta1 = math.pi - angle + gamma
         theta2 = math.pi - angle - gamma
+        print('norm AB: ', point2, point1)
         C = [[AB + norm(AB) * [math.cos(theta1), math.sin(theta1)],
              AB + norm(AB) * [math.cos(theta1), -math.sin(theta1)],
              AB + norm(AB) * [-math.cos(theta2), math.sin(theta2)],
