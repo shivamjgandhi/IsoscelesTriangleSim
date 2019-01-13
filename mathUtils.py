@@ -76,7 +76,7 @@ def triangleIntersection(triangle1, triangle2):
             # Check if they're the same lines
             if m1 == m2 and b1 == b2:
                 sameEdges += 1
-            else:
+            elif m1 != m2:
                 x = - (b2 - b1)/(m2 - m1)
                 if (x < point11[0]) and (x > point12[0]):
                     individualIntersection = True
