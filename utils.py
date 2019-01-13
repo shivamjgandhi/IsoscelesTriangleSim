@@ -50,7 +50,7 @@ def generateTriangles(angle, N, method):
     print('added triangle 1')
 
     # Generate the other N-1 triangles
-    for i in range(2, N):
+    for i in range(1, N):
         print('added triangle ', str(i))
         packing = generateIndividualTriangle(packing, angle, method)
 

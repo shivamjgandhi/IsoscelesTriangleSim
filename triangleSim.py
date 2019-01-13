@@ -14,7 +14,7 @@ def arg_parse():
     parser.add_argument("--angle", dest="angle", help="Primary angle of the isoscles triangle",
                         default=60, type=int)
     parser.add_argument("--number", dest="N", help="Number of triangles to simulate",
-                        default=3, type=int)
+                        default=30, type=int)
     return parser.parse_args()
 
 
