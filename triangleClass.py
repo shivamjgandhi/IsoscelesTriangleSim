@@ -37,13 +37,11 @@ class randomPacking:
         edgePoint1, edgePoint2 = self.boundary[edge], self.boundary[(edge + 1) % len(self.boundary)]
         addedPoint = None
         for i in range(0, 3):
-            if not np.array_equal(addedTriangle.coordinates[i], edgePoint1) and \
-                    not np.array_equal(addedTriangle.coordinates[i], edgePoint2):
-                addedPoint = addedTriangle.coordinates[i]
+            if not np.array_equal(addedTriangle.coordinates[i], edgePoint1):
+                if not np.array_equal(addedTriangle.coordinates[i], edgePoint2):
+                    addedPoint = addedTriangle.coordinates[i]
 
-        print('added point: ', addedPoint)
-        print('look here: ', self.boundary[:edge], [addedPoint], self.boundary[edge:])
-        newBoundary = self.boundary[:edge] + [addedPoint] + self.boundary[(edge + 1):]
+        newBoundary = np.concatenate((self.boundary[:edge], [addedPoint], self.boundary[edge:]), axis = 0)
 
         self.triangleCount += 1
         self.boundary = newBoundary

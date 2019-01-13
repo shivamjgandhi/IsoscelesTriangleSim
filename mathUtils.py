@@ -39,7 +39,7 @@ def intersection(proposals, packing, randomEdge):
 
     :param proposals: the proposal triangles that could be added to the packing, a list of triangle objects
     :param packing: the existing packing with all of its triangles, a packing object
-    :param randomEdge: the edge that the propsal triangles are trying out for, an int
+    :param randomEdge: the edge that the proposal triangles are trying out for, an int
     :return intersections: tells which of the new proposal triangles intersects the existing
     packing triangles, a list of booleans
     """
@@ -48,7 +48,8 @@ def intersection(proposals, packing, randomEdge):
     # Go through each triangle in the packing and check to make sure there isn't an intersection
     for i in range(0, packing.triangleCount):
         for j in range(0, len(intersections)):
-            intersections[j] = triangleIntersection(packing.triangleList[i], proposals[j])
+            if not intersections[j]:
+                intersections[j] = triangleIntersection(packing.triangleList[i], proposals[j])
 
     return intersections
 
