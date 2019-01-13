@@ -45,7 +45,7 @@ class randomPacking:
 
         self.triangleCount += 1
         self.boundary = newBoundary
-
+        self.triangleList.append(addedTriangle)
 
 class triangle:
     def __init__(self, coordinates, serialNumber):
