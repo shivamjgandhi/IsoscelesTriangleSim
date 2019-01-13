@@ -136,10 +136,10 @@ def generateProposalCoordinates(edge, packing, angle):
         theta1 = math.pi - angle + gamma
         theta2 = math.pi - angle - gamma
         print('norm AB: ', point2, point1)
-        C = [[AB + norm(AB) * [math.cos(theta1), math.sin(theta1)],
-             AB + norm(AB) * [math.cos(theta1), -math.sin(theta1)],
-             AB + norm(AB) * [-math.cos(theta2), math.sin(theta2)],
-             AB + norm(AB) * [-math.cos(theta2), -math.sin(theta2)]]]
+        C = [[AB + norm(AB) * [round3(math.cos(theta1)), round3(math.sin(theta1))],
+             AB + norm(AB) * [round3(math.cos(theta1)), -round3(math.sin(theta1))],
+             AB + norm(AB) * [-round3(math.cos(theta2)), round3(math.sin(theta2))],
+             AB + norm(AB) * [-round3(math.cos(theta2)), -round3(math.sin(theta2))]]]
 
         proposals = []
         for i in range(0, 4):
