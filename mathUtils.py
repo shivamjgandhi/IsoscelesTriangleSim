@@ -63,7 +63,7 @@ def triangleIntersection(triangle1, triangle2):
     individualIntersection = False
     sameEdges = 0
     for i in range(0,3):
-        for j in range(i, 3):
+        for j in range(0, 3):
             # Compute the point slope form of the first line
             point11 = triangle1.coordinates[i]
             point12 = triangle1.coordinates[(i+1) % 3]
