@@ -116,7 +116,7 @@ def generateProposalCoordinates(edge, packing, angle):
         magnitude = round3(1 / 2 / math.tan(angle / 2))
         v = round3([magnitude * elem for elem in e])
 
-        # second proposal
+        # proposal coordinates
         point3 = Midpoint - v
         coordinates = np.asarray([point1, point2, point3])
         proposal = triangle(coordinates, None)
