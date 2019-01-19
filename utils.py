@@ -116,17 +116,12 @@ def generateProposalCoordinates(edge, packing, angle):
         magnitude = round3(1 / 2 / math.tan(angle / 2))
         v = round3([magnitude * elem for elem in e])
 
-        # first proposal
-        point3 = Midpoint + v
-        coordinates = np.asarray([point1, point2, point3])
-        proposal1 = triangle(coordinates, None)
-
         # second proposal
         point3 = Midpoint - v
         coordinates = np.asarray([point1, point2, point3])
-        proposal2 = triangle(coordinates, None)
+        proposal = triangle(coordinates, None)
 
-        proposals = [proposal1, proposal2]
+        proposals = [proposal]
     else:
         # When we're adding onto one of the isosceles sides
         if AB[0] == 0:
