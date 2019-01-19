@@ -33,13 +33,12 @@ def pointSlopeForm(point1, point2):
         b = point1[1] - m * point1[0]
     return round3(m), round3(b)
 
-def intersection(proposals, packing, randomEdge):
+def intersection(proposals, packing):
     """
     Tells whether or not the new triangle intersects any of the other triangles in the packing
 
     :param proposals: the proposal triangles that could be added to the packing, a list of triangle objects
     :param packing: the existing packing with all of its triangles, a packing object
-    :param randomEdge: the edge that the proposal triangles are trying out for, an int
     :return intersections: tells which of the new proposal triangles intersects the existing
     packing triangles, a list of booleans
     """
@@ -52,6 +51,18 @@ def intersection(proposals, packing, randomEdge):
                 intersections[j] = triangleIntersection(packing.triangleList[i], proposals[j])
 
     return intersections
+
+def fastIntersection(proposals, packing, randomEdge):
+    """
+    A method that checks the intersections of the proposal triangles in O(1) time. Used as an alternative to
+    the above method
+
+    :param proposals: the proposal triangles that could be added to the packing, a list of triangle objects
+    :param packing: the existing packing with all of its triangles, a packing object
+    :param randomEdge: the edge that we're adding onto
+    :return intersections: tells which of the new proposal triangles intersects the existing
+    packing triangles, a list of booleans
+    """
 
 def triangleIntersection(triangle1, triangle2):
     """
