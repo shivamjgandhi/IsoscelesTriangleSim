@@ -112,3 +112,9 @@ def round3(number):
         return [np.round_(elem, 3) for elem in number]
     elif type(number) is list:
         return [round(elem, 3) for elem in number]
+
+def floatMult(number, array):
+    """
+    Multiplies an array elementwise by a float
+    """
+    return [number*i for i in array]

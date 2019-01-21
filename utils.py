@@ -91,7 +91,7 @@ def generateIndividualTriangle(packing, angle, method):
         # print('packing coordinates: ', packing.boundary)
         randomEdge = packing.generateRandomEdge(method)
         proposals = generateProposalCoordinates(randomEdge, packing, angle)
-        intersections = intersection(proposals, packing, randomEdge)
+        intersections = intersection(proposals, packing)
         if False in intersections:
             packing.insertTriangle(proposals[intersections.index(False)], randomEdge)
             notAdded = False
@@ -130,12 +130,11 @@ def generateProposalCoordinates(edge, packing, angle):
             gamma = math.atan(AB[1]/AB[0])
         theta1 = math.pi - angle + gamma
         theta2 = math.pi - angle - gamma
-        print('norm AB: ', point2, point1)
-        C = [[AB + norm(AB) * [round3(math.cos(theta1)), round3(math.sin(theta1))],
-             AB + norm(AB) * [round3(math.cos(theta1)), -round3(math.sin(theta1))],
-             AB + norm(AB) * [-round3(math.cos(theta2)), round3(math.sin(theta2))],
-             AB + norm(AB) * [-round3(math.cos(theta2)), -round3(math.sin(theta2))]]]
-
+        C = [[AB + floatMult(norm(AB), [round3(math.cos(theta1)), round3(math.sin(theta1))]),
+             AB + floatMult(norm(AB), [round3(math.cos(theta1)), -round3(math.sin(theta1))]),
+             AB + floatMult(norm(AB), [-round3(math.cos(theta2)), round3(math.sin(theta2))]),
+             AB + floatMult(norm(AB), [-round3(math.cos(theta2)), -round3(math.sin(theta2))])]]
+        print('look here: ', C)
         proposals = []
         for i in range(0, 4):
             coordinates = np.asarray([point1, point2, C[i]])
