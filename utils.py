@@ -130,11 +130,11 @@ def generateProposalCoordinates(edge, packing, angle):
             gamma = math.atan(AB[1]/AB[0])
         theta1 = math.pi - angle + gamma
         theta2 = math.pi - angle - gamma
-        C = [[AB + floatMult(norm(AB), [round3(math.cos(theta1)), round3(math.sin(theta1))]),
+        C = [AB + floatMult(norm(AB), [round3(math.cos(theta1)), round3(math.sin(theta1))]),
              AB + floatMult(norm(AB), [round3(math.cos(theta1)), -round3(math.sin(theta1))]),
              AB + floatMult(norm(AB), [-round3(math.cos(theta2)), round3(math.sin(theta2))]),
-             AB + floatMult(norm(AB), [-round3(math.cos(theta2)), -round3(math.sin(theta2))])]]
-        print('look here: ', C)
+             AB + floatMult(norm(AB), [-round3(math.cos(theta2)), -round3(math.sin(theta2))])]
+        print()
         proposals = []
         for i in range(0, 4):
             coordinates = np.asarray([point1, point2, C[i]])
