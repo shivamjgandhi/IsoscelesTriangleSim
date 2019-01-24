@@ -88,7 +88,6 @@ def generateIndividualTriangle(packing, angle, method):
     """
     notAdded = True
     while notAdded:
-        # print('packing coordinates: ', packing.boundary)
         randomEdge = packing.generateRandomEdge(method)
         proposals = generateProposalCoordinates(randomEdge, packing, angle)
         intersections = intersection(proposals, packing)
