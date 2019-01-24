@@ -134,9 +134,9 @@ def generateProposalCoordinates(edge, packing, angle):
              AB + floatMult(norm(AB), [round3(math.cos(theta1)), -round3(math.sin(theta1))]),
              AB + floatMult(norm(AB), [-round3(math.cos(theta2)), round3(math.sin(theta2))]),
              AB + floatMult(norm(AB), [-round3(math.cos(theta2)), -round3(math.sin(theta2))])]
-        print()
+        print('look here: ', AB, [round3(math.cos(theta1)), round3(math.sin(theta1))])
         proposals = []
-        for i in range(0, 4):
+        for i in range(4):
             coordinates = np.asarray([point1, point2, C[i]])
             newTriangle = triangle(coordinates, None)
             proposals.append(newTriangle)
