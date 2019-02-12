@@ -8,3 +8,6 @@ def uniformDist(boundary):
     :return edge: The edge to grow off of, an int
     """
     return randint(0, len(boundary)-1)
+
+def uniformAcrossProposals(boundary):
+    return randint(0, )

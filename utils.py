@@ -91,7 +91,7 @@ def generateIndividualTriangle(packing, angle, method):
         randomEdge = packing.generateRandomEdge(method)
         proposals = generateProposalCoordinates(randomEdge, packing, angle)
         intersections = intersection(proposals, packing)
-        for triangle in proposals: print(triangle.coordinates)
+        for instanceTriangle in proposals: print(instanceTriangle.coordinates)
         if False in intersections:
             packing.insertTriangle(proposals[intersections.index(False)], randomEdge)
             notAdded = False

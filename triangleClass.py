@@ -4,7 +4,7 @@ import growthMethods
 from mathUtils import *
 
 class randomPacking:
-    def __init__(self, boundary, triangleCount, triangleList):
+    def __init__(self, boundary, triangleCount, triangleList, numProposals):
         """
         Creates an object that defines the entire random packing
         :param boundary: the boundary for the region, a numpy array defining a set of points
@@ -14,6 +14,7 @@ class randomPacking:
         self.boundary = boundary
         self.triangleCount = triangleCount
         self.triangleList = triangleList
+        self.numProposals = numProposals
 
     def generateRandomEdge(self, method):
         """
@@ -23,6 +24,9 @@ class randomPacking:
         """
         if method == 'uniform':
             edge = growthMethods.uniformDist(self.boundary)
+            return edge
+        if method == 'proposals':
+            edge = growthMethods.uniformAcrossProposals(self.boundary)
             return edge
 
     def insertTriangle(self, addedTriangle, edge):
