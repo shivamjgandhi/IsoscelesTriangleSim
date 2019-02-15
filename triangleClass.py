@@ -65,6 +65,19 @@ class randomPacking:
                               np.dot(new_proposal.center, new_proposal.center) / (self.triangleCount + 1)
         return new_radius_gyration
 
+    def updatePacking(self, proposal):
+        # update packing center and radius of gyration
+        new_center = 1 / (self.triangleCount + 1) * (self.triangleCount * self.packingCenter + proposal.center)
+        new_radius_gyration = -np.dot(new_center, new_center) + self.triangleCount / (self.triangleCount + 1) * \
+                              (self.radiusOfGyration + np.dot(self.packingCenter, self.packingCenter)) + \
+                              np.dot(proposal.center, proposal.center) / (self.triangleCount + 1)
+        self.packingCenter = new_center
+        self.radiusOfGyration = new_radius_gyration
+
+        # update the boundary and distribution
+
+        return self
+
 
 class triangle:
     def __init__(self, coordinates, serialNumber):

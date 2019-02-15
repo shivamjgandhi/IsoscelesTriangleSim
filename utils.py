@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import numpy as np
 import math
+import random
 from random import randint
 from triangleClass import *
 
@@ -100,14 +101,22 @@ def generateIndividualTriangle(packing, angle, method):
     return packing
     """
     notAdded = True
+    proposal = np.asarray([])
     while notAdded:
         randomEdge = packing.generateRandomEdge(method='proposals')
         proposal = generateProposalCoordinates(randomEdge, packing, angle)
         isIntersection = intersection(proposal, packing)
         if isIntersection: continue
-        deltaRadiusGyration = packing.computeNewRadiusGyration() - packing.radiusOfGyration
+        deltaRadiusGyration = np.max(packing.computeNewRadiusGyration() - packing.radiusOfGyration,0)
+        t = random.uniform(0,1)
+        if math.exp(deltaRadiusGyration) >= t:
+            # Add in the new triangle
+            notAdded = False
+    # update the packing to include the new triangle
+    if not notAdded:
+        packing.updatePacking(proposal)
 
-
+    return packing
 
 def generateProposalCoordinates(edge, packing, angle):
     """
