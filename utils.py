@@ -86,16 +86,28 @@ def generateIndividualTriangle(packing, angle, method):
     :param angle: the angle of the isosceles triangle, a float
     :return packing: the random packing, a packing object
     """
+
+    """
     notAdded = True
     while notAdded:
         randomEdge = packing.generateRandomEdge(method)
-        proposals = generateProposalCoordinates(randomEdge, packing, angle)
-        intersections = intersection(proposals, packing)
-        for instanceTriangle in proposals: print(instanceTriangle.coordinates)
+        proposal = generateProposalCoordinates(randomEdge, packing, angle)
+        intersections = intersection(proposal, packing)
+        print(proposal[0].coordinates)
         if False in intersections:
-            packing.insertTriangle(proposals[intersections.index(False)], randomEdge)
+            packing.insertTriangle(proposal[0][intersections.index(False)], randomEdge)
             notAdded = False
     return packing
+    """
+    notAdded = True
+    while notAdded:
+        randomEdge = packing.generateRandomEdge(method='proposals')
+        proposal = generateProposalCoordinates(randomEdge, packing, angle)
+        isIntersection = intersection(proposal, packing)
+        if isIntersection: continue
+        deltaRadiusGyration = packing.computeNewRadiusGyration() - packing.radiusOfGyration
+
+
 
 def generateProposalCoordinates(edge, packing, angle):
     """

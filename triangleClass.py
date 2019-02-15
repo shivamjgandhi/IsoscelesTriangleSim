@@ -2,19 +2,22 @@ import numpy as np
 import growthMethods
 from mathUtils import *
 
+
 class randomPacking:
-    def __init__(self, boundary, triangleCount, triangleList, numProposals, boundaryDist):
+    def __init__(self, boundary, triangleCount, triangleList, boundaryDist=None, radius=0, center=None):
         """
         Creates an object that defines the entire random packing
         :param boundary: the boundary for the region, a numpy array defining a set of points
         :param triangleCount: the number of triangles in the packing, an int
         :param triangleList: a list of all of the individual triangles, a list
         """
+
         self.boundary = boundary
         self.boundaryDist = boundaryDist
         self.triangleCount = triangleCount
         self.triangleList = triangleList
-        self.numProposals = numProposals
+        self.radiusOfGyration = radius
+        self.packingCenter = center
 
     def generateRandomEdge(self, method):
         """
@@ -26,8 +29,7 @@ class randomPacking:
             edge = growthMethods.uniformDist(self.boundary)
             return edge
         if method == 'proposals':
-            edge = growthMethods.uniformAcrossProposals(self.boundaryDist)
-            return edge
+            return growthMethods.uniformAcrossProposals(self.boundaryDist)
 
     def insertTriangle(self, addedTriangle, edge):
         """
@@ -45,11 +47,24 @@ class randomPacking:
                 if not np.array_equal(addedTriangle.coordinates[i], edgePoint2):
                     addedPoint = addedTriangle.coordinates[i]
 
-        newBoundary = np.concatenate((self.boundary[:(edge+1)], [addedPoint], self.boundary[(edge+1):]), axis=0)
+        newBoundary = np.concatenate((self.boundary[:(edge + 1)], [addedPoint], self.boundary[(edge + 1):]), axis=0)
 
         self.triangleCount += 1
         self.boundary = newBoundary
         self.triangleList.append(addedTriangle)
+
+    def computeNewRadiusGyration(self, new_proposal):
+        """
+        Computes the new radius of gyration given a new proposal triangle via an update equation
+        :param new_proposal: new triangle that will determine the new radius of gyration
+        :return new_radius_gyration
+        """
+        new_center = 1 / (self.triangleCount + 1) * (self.triangleCount * self.packingCenter + new_proposal.center)
+        new_radius_gyration = -np.dot(new_center, new_center) + self.triangleCount / (self.triangleCount + 1) * \
+                              (self.radiusOfGyration + np.dot(self.packingCenter, self.packingCenter)) + \
+                              np.dot(new_proposal.center, new_proposal.center) / (self.triangleCount + 1)
+        return new_radius_gyration
+
 
 class triangle:
     def __init__(self, coordinates, serialNumber):
@@ -60,9 +75,18 @@ class triangle:
         """
         self.coordinates = coordinates
         self.serialNumber = serialNumber
+        self.center = self.computeCenter(coordinates)
 
     def setCoordinates(self, coordinates):
         self.coordinates = coordinates
 
     def setSerialNumber(self, serialNumber):
         self.serialNumber = serialNumber
+
+    def computeCenter(self):
+        x_accum = 0
+        y_accum = 0
+        for i in range(3):
+            y_accum += self.coordinates[i, 0] / 3
+            x_accum += self.coordinates[i, 1] / 3
+        return np.asarray([y_accum, x_accum])
