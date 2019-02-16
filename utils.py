@@ -101,20 +101,17 @@ def generateIndividualTriangle(packing, angle, method):
     return packing
     """
     notAdded = True
-    proposal = np.asarray([])
     while notAdded:
         randomEdge = packing.generateRandomEdge(method='proposals')
         proposal = generateProposalCoordinates(randomEdge, packing, angle)
-        isIntersection = intersection(proposal, packing)
-        if isIntersection: continue
-        deltaRadiusGyration = np.max(packing.computeNewRadiusGyration() - packing.radiusOfGyration,0)
-        t = random.uniform(0,1)
-        if math.exp(deltaRadiusGyration) >= t:
-            # Add in the new triangle
-            notAdded = False
-    # update the packing to include the new triangle
-    if not notAdded:
-        packing.updatePacking(proposal)
+        isIntersection = fastIntersection(proposal, packing, randomEdge)
+        if not isIntersection:
+            deltaRadiusGyration = np.max(packing.computeNewRadiusGyration() - packing.radiusOfGyration, 0)
+            t = random.uniform(0, 1)
+            if math.exp(deltaRadiusGyration) >= t:
+                # Add in the new triangle
+                notAdded = False
+                packing.updatePacking(proposal)
 
     return packing
 

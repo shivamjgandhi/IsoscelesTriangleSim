@@ -52,7 +52,7 @@ def intersection(proposals, packing):
 
     return intersections
 
-def fastIntersection(proposals, packing, randomEdge):
+def fastIntersection(proposal, packing, randomEdge):
     """
     A method that checks the intersections of the proposal triangles in O(1) time. Used as an alternative to
     the above method
@@ -63,6 +63,15 @@ def fastIntersection(proposals, packing, randomEdge):
     :return intersections: tells which of the new proposal triangles intersects the existing
     packing triangles, a list of booleans
     """
+    # If the length of the packing boundary is less than 7, then just brute force it for not
+    if len(packing.boundary) < 7:
+        for i in range(0, len(packing.boundary)):
+            m_edge, b_edge = pointSlopeForm()
+            for j in range(3):
+                m1, b1 = pointSlopeForm(proposal.coordinates[i], proposal.coordinates[(i+1) % 3])
+
+    else:
+
 
 def triangleIntersection(triangle1, triangle2):
     """
@@ -97,6 +106,13 @@ def triangleIntersection(triangle1, triangle2):
         individualIntersection = True
 
     return individualIntersection
+
+def triangleLineIntersection(triangle, point1, point2):
+
+    intersection = False
+
+
+    return intersection
 
 def round3(number):
     """

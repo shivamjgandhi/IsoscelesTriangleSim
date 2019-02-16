@@ -12,8 +12,9 @@ class randomPacking:
         :param triangleList: a list of all of the individual triangles, a list
         """
 
+        if boundaryDist is None:
+            self.boundaryDist = np.asarray([0, 1, 1, 2, 2])
         self.boundary = boundary
-        self.boundaryDist = boundaryDist
         self.triangleCount = triangleCount
         self.triangleList = triangleList
         self.radiusOfGyration = radius
@@ -88,7 +89,7 @@ class triangle:
         """
         self.coordinates = coordinates
         self.serialNumber = serialNumber
-        self.center = self.computeCenter(coordinates)
+        self.center = self.computeCenter()
 
     def setCoordinates(self, coordinates):
         self.coordinates = coordinates
