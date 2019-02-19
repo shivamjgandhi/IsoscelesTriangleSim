@@ -10,13 +10,20 @@ from mathUtils import *
 
 # The following functions are tests for packing functions
 
-# TODO: complete this test
-class randomEdgeTest(unittest.TestCase):
+class packingTest(unittest.TestCase):
 
-# TODO: complete this test
-class newRadiusTest(unittest.TestCase):
+    # TODO: complete this test
+    def randomEdgeTest(self):
 
-# TODO: complete this test
-class updatePackingTest(unittest.TestCase):
+    # TODO: complete this test
+    def newRadiusTest(self):
+
+    # TODO: complete this test
+    def updatePackingTest(self):
 
 """ These are our first order functions"""
+
+""" Run the tests"""
+
+if __name__ == '__main__':
+    unittest.main()
