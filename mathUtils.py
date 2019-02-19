@@ -57,21 +57,34 @@ def fastIntersection(proposal, packing, randomEdge):
     A method that checks the intersections of the proposal triangles in O(1) time. Used as an alternative to
     the above method
 
-    :param proposals: the proposal triangles that could be added to the packing, a list of triangle objects
+    :param proposal: the proposal triangles that could be added to the packing, a list of triangle objects
     :param packing: the existing packing with all of its triangles, a packing object
     :param randomEdge: the edge that we're adding onto
-    :return intersections: tells which of the new proposal triangles intersects the existing
-    packing triangles, a list of booleans
     """
     # If the length of the packing boundary is less than 7, then just brute force it for not
     if len(packing.boundary) < 7:
         for i in range(0, len(packing.boundary)):
-            m_edge, b_edge = pointSlopeForm()
+            m_edge, b_edge = pointSlopeForm(packing.boundary[i], packing.boundary[(i+1) % len(packing.boundary)])
             for j in range(3):
                 m1, b1 = pointSlopeForm(proposal.coordinates[i], proposal.coordinates[(i+1) % 3])
-
+            # Check if they're the same lines
+            if m1 == m_edge and b1 == b_edge:
+                sameLine = i
+            elif m1 != m_edge:
+                x = - (b_edge - b1) / (m_edge - m1)
+                if (x < packing.boundary[i, 0]) and (x > packing.boundary[(i+1) % len(packing.boundary), 0]):
+                    isIntersection = True
+                    break
     else:
+        oldPoint1 = packing.boundary[randomEdge]
+        oldPoint2 = packing.boundary[(randomEdge + 1) ]
+        # Forward direction
+        for i in range(4):
 
+        # Backward direction
+        for i in range(3):
+
+    return isIntersection, sameLine
 
 def triangleIntersection(triangle1, triangle2):
     """
@@ -106,13 +119,6 @@ def triangleIntersection(triangle1, triangle2):
         individualIntersection = True
 
     return individualIntersection
-
-def triangleLineIntersection(triangle, point1, point2):
-
-    intersection = False
-
-
-    return intersection
 
 def round3(number):
     """

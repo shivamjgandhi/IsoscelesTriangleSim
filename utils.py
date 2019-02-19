@@ -160,3 +160,5 @@ def generateProposalCoordinates(edge, packing, angle):
             proposals.append(newTriangle)
 
     return proposals
+
+def generateSingleProposal(edge, packing, angle):
