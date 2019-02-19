@@ -168,9 +168,32 @@ def generateSingleProposal(proposal_edge, edge, packing, angle):
     """
     This function generates a single Proposal triangle when using the weighted distribution method
 
-    :param proposal_edge:
-    :param edge:
-    :param packing:
-    :param angle:
-    :return:
+    :param proposal_edge: the proposal triangle number in packing.dist
+    :param edge: the edge of growth
+    :param packing: the random packing
+    :param angle: the angle of the triangle
+    :return proposal_triangle: the proposal triangle
     """
+    point1 = packing.boundary[edge]
+    point2 = packing.boundary[(edge + 1) % len(packing.boundary)]
+    AB = point2 - point1
+
+    # First we check which orientation triangle we're creating based on the boundary dist, and then create
+    if packing.boundaryDist[proposal_edge] == packing.boundaryDist[(proposal_edge + 1) % len(packing.boundaryDist)]:
+        orientation = 'Left'
+        proposal_triangle =
+    if packing.boundaryDist[proposal_edge] == packing.boundaryDist[(proposal_edge - 1) % len(packing.boundaryDist)]:
+        orientation = 'Right'
+    else:
+        # When we're adding onto the edge opposite the angle of interest
+        Midpoint = point1 + 1 / 2 * AB
+        e = [-AB[1], AB[0]]
+        magnitude = round3(1 / 2 / math.tan(angle / 2))
+        v = round3([magnitude * elem for elem in e])
+
+        # proposal coordinates
+        point3 = Midpoint - v
+        coordinates = np.asarray([point1, point2, point3])
+        proposal_triangle = triangle(coordinates, None)
+
+    return proposal_triangle
