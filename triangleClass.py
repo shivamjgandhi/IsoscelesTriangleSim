@@ -30,7 +30,8 @@ class randomPacking:
             edge = growthMethods.uniformDist(self.boundary)
             return edge
         if method == 'proposals':
-            return growthMethods.uniformAcrossProposals(self.boundaryDist)
+            prop = growthMethods.uniformAcrossProposals(self.boundaryDist)
+            return prop
 
     def insertTriangle(self, addedTriangle, edge):
         """

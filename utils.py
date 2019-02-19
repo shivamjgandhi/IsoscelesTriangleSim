@@ -103,7 +103,10 @@ def generateIndividualTriangle(packing, angle, method):
     notAdded = True
     while notAdded:
         randomEdge = packing.generateRandomEdge(method='proposals')
-        proposal = generateProposalCoordinates(randomEdge, packing, angle)
+        if method == 'proposals':
+            growthEdge = packing.boundary[randomEdge]
+        if method == 'proposals':
+            proposal = generateSingleProposal(randomEdge, growthEdge, packing, angle)
         isIntersection = fastIntersection(proposal, packing, randomEdge)
         if not isIntersection:
             deltaRadiusGyration = np.max(packing.computeNewRadiusGyration() - packing.radiusOfGyration, 0)
@@ -161,4 +164,13 @@ def generateProposalCoordinates(edge, packing, angle):
 
     return proposals
 
-def generateSingleProposal(edge, packing, angle):
+def generateSingleProposal(proposal_edge, edge, packing, angle):
+    """
+    This function generates a single Proposal triangle when using the weighted distribution method
+
+    :param proposal_edge:
+    :param edge:
+    :param packing:
+    :param angle:
+    :return:
+    """

@@ -10,4 +10,4 @@ def uniformDist(boundary):
     return randint(0, len(boundary)-1)
 
 def uniformAcrossProposals(boundaryDist):
-    return boundaryDist[randint(0, len(boundaryDist)-1)]
+    return randint(0, len(boundaryDist)-1)
