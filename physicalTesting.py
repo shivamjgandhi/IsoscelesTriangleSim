@@ -3,8 +3,8 @@ import math
 import numpy as np
 
 from triangleClass import *
-from utils import *
-from mathUtils import *
+# from utils import *
+# from mathUtils import *
 
 """ These are our 0th order functions, base functions unused by others"""
 
@@ -26,11 +26,13 @@ class packingTest(unittest.TestCase):
         first_triangle = triangle(triangle_coordinates, 1)
         first_packing = randomPacking(first_triangle.coordinates, 1, [first_triangle])
 
-        # TODO: complete this test
         # randomEdgeTest
+        assert(first_packing.boundaryDist[first_packing.generateRandomEdge('proposals')] in first_packing.boundaryDist)
 
         # TODO: complete this test
         # newRadiusTest
+        first_packing.packingCenter = np.sum(first_triangle.coordinates, axis=0)
+        first_packing.radiusOfGyration =
 
         # TODO: complete this test
         # updatePackingTest

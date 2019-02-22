@@ -79,10 +79,10 @@ def fastIntersection(proposal, packing, randomEdge):
         oldPoint1 = packing.boundary[randomEdge]
         oldPoint2 = packing.boundary[(randomEdge + 1) ]
         # Forward direction
-        for i in range(4):
+        # for i in range(4):
 
-        # Backward direction
-        for i in range(3):
+    # Backward direction
+    # for i in range(3):
 
     return isIntersection, sameLine
 
