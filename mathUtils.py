@@ -1,5 +1,6 @@
 import numpy as np
 import math
+from numpy.linalg import norm
 from triangleClass import *
 
 def toRadians(angle):
@@ -52,7 +53,9 @@ def intersection(proposals, packing):
 
     return intersections
 
+
 def fastIntersection(proposal, packing, randomEdge):
+
     """
     A method that checks the intersections of the proposal triangles in O(1) time. Used as an alternative to
     the above method
@@ -85,6 +88,27 @@ def fastIntersection(proposal, packing, randomEdge):
     # for i in range(3):
 
     return isIntersection, sameLine
+
+def boundaryIntersection(packing, triangle, growthEdge):
+    """
+    This algorithm checks if any of the lines on the boundary of the packing intersect with the proposal triangle. It
+    also returns points that match the new point in the triangle.
+
+    :param packing: the packing with the boundary, a packing object
+    :param triangle: the proposal triangle, a triangle object
+    :param growthEdge: the edge the triangle is growing off of, an int
+    :return:
+    """
+
+    # Figure out which point is the new point
+    first_point = packing.boundary[growthEdge]
+    second_point = packing.boundary[(growthEdge + 1) % len(packing.boundary)]
+    for point in triangle.coordinates:
+        if not comparePoints(first_point, point) and not comparePoints(second_point, point):
+            new_point = point
+
+    # Go through each edge in the boundary and check if
+
 
 def triangleIntersection(triangle1, triangle2):
     """
@@ -140,3 +164,13 @@ def floatMult(number, array):
     Multiplies an array elementwise by a float
     """
     return [number*i for i in array]
+
+def comparePoints(point1, point2):
+    """
+    Checks whether two points are the same approximately. Returns true if the two points are under the
+    threshold distance, returns false otherwise
+    :param point1:
+    :param point2:
+    :return:
+    """
+    return norm(point2 - point1) < 0.05

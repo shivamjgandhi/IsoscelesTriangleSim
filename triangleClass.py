@@ -30,8 +30,9 @@ class randomPacking:
             edge = growthMethods.uniformDist(self.boundary)
             return edge
         if method == 'proposals':
-            prop = growthMethods.uniformAcrossProposals(self.boundaryDist)
-            return prop
+            # this number will be in range(0, len(boundarydist) - 1)
+            proposition = growthMethods.uniformAcrossProposals(self.boundaryDist)
+            return proposition
 
     def insertTriangle(self, addedTriangle, edge):
         """
@@ -70,13 +71,12 @@ class randomPacking:
     def updatePacking(self, proposal):
         # update packing center and radius of gyration
         new_center = 1 / (self.triangleCount + 1) * (self.triangleCount * self.packingCenter + proposal.center)
-        new_radius_gyration = -np.dot(new_center, new_center) + self.triangleCount / (self.triangleCount + 1) * \
-                              (self.radiusOfGyration + np.dot(self.packingCenter, self.packingCenter)) + \
-                              np.dot(proposal.center, proposal.center) / (self.triangleCount + 1)
+        new_radius_gyration = self.computeNewRadiusGyration(proposal)
         self.packingCenter = new_center
         self.radiusOfGyration = new_radius_gyration
 
         # update the boundary and distribution
+
 
         return self
 

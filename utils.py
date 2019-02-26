@@ -106,6 +106,8 @@ def generateIndividualTriangle(packing, angle, method):
         if method == 'proposals':
             growthEdge = packing.boundary[randomEdge]
         if method == 'proposals':
+            # in this case, randomEdge is between 0 and len(boundarydist)
+            growthEdge =
             proposal = generateSingleProposal(randomEdge, growthEdge, packing, angle)
         isIntersection = fastIntersection(proposal, packing, randomEdge)
         if not isIntersection:
@@ -184,6 +186,7 @@ def generateSingleProposal(proposal_edge, edge, packing, angle):
         proposal_triangle =
     if packing.boundaryDist[proposal_edge] == packing.boundaryDist[(proposal_edge - 1) % len(packing.boundaryDist)]:
         orientation = 'Right'
+        proposal_triangle =
     else:
         # When we're adding onto the edge opposite the angle of interest
         Midpoint = point1 + 1 / 2 * AB
