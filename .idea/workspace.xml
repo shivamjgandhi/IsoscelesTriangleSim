@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="14464fe2-7ab8-4068-ae33-78efe3575590" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/growthMethods.py" beforeDir="false" afterPath="$PROJECT_DIR$/growthMethods.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mathUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/mathUtils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/triangleClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/triangleClass.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +69,7 @@
         <entry file="file://$PROJECT_DIR$/mathUtils.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="886">
-              <caret line="169" column="12" lean-forward="true" selection-start-line="169" selection-start-column="12" selection-end-line="169" selection-end-column="12" />
+              <caret line="113" column="37" lean-forward="true" selection-start-line="113" selection-start-column="37" selection-end-line="113" selection-end-column="37" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -292,7 +289,7 @@
       <workItem from="1550592511585" duration="8286000" />
       <workItem from="1550698024715" duration="73000" />
       <workItem from="1550801582344" duration="3303000" />
-      <workItem from="1551021509060" duration="6227000" />
+      <workItem from="1551021509060" duration="7119000" />
     </task>
     <servers />
   </component>
@@ -329,7 +326,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106640000" />
+    <option name="totallyTimeSpent" value="107532000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -358,8 +355,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32936722" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.23634396" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.32666305" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.23634396" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32666305" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -526,7 +523,7 @@
     <entry file="file://$PROJECT_DIR$/mathUtils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="886">
-          <caret line="169" column="12" lean-forward="true" selection-start-line="169" selection-start-column="12" selection-end-line="169" selection-end-column="12" />
+          <caret line="113" column="37" lean-forward="true" selection-start-line="113" selection-start-column="37" selection-end-line="113" selection-end-column="37" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

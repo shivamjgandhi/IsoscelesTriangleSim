@@ -89,13 +89,13 @@ def fastIntersection(proposal, packing, randomEdge):
 
     return isIntersection, sameLine
 
-def boundaryIntersection(packing, triangle, growthEdge):
+def boundaryIntersection(packing, proposal_triangle, growthEdge):
     """
     This algorithm checks if any of the lines on the boundary of the packing intersect with the proposal triangle. It
     also returns points that match the new point in the triangle.
 
     :param packing: the packing with the boundary, a packing object
-    :param triangle: the proposal triangle, a triangle object
+    :param proposal_triangle: the proposal triangle, a triangle object
     :param growthEdge: the edge the triangle is growing off of, an int
     :return:
     """
@@ -103,11 +103,21 @@ def boundaryIntersection(packing, triangle, growthEdge):
     # Figure out which point is the new point
     first_point = packing.boundary[growthEdge]
     second_point = packing.boundary[(growthEdge + 1) % len(packing.boundary)]
-    for point in triangle.coordinates:
+    new_point = None
+    for point in proposal_triangle.coordinates:
         if not comparePoints(first_point, point) and not comparePoints(second_point, point):
             new_point = point
 
-    # Go through each edge in the boundary and check if
+    # Put the new lines being added from new_point in slope intercept form
+    m1, b1 = pointSlopeForm(first_point, new_point)
+    m2, b2 = pointSlopeForm(second_point, new_point)
+
+    # Go through each edge in the boundary and check if any of the new lines on the triangle intersect. Also check if
+    # new_point matches any of these points
+    for edge in packing.boundary:
+
+
+    return isIntersection, matchPoint
 
 
 def triangleIntersection(triangle1, triangle2):
