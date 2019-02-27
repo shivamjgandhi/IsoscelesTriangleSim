@@ -114,8 +114,31 @@ def boundaryIntersection(packing, proposal_triangle, growthEdge):
 
     # Go through each edge in the boundary and check if any of the new lines on the triangle intersect. Also check if
     # new_point matches any of these points
-    for edge in packing.boundary:
+    matchPoint = None
+    isIntersection = False
+    for edge_pt in range(len(packing.boundary)):
+        m_edge, b_edge = pointSlopeForm(packing.boundary[edge_pt],
+                                        packing.boundary[(edge_pt + 1)] % len(packing.boundary))
+        # check if new_point is the same as edge_pt
+        if comparePoints(edge_pt, new_point):
+            matchPoint = edge_pt
 
+        # check if the edge intersects with either side of the triangle
+        if m_edge == m1 and b_edge == b1:
+            pass
+        elif m_edge != m1:
+            x = - (b1 - b_edge) / (m1 - m_edge)
+            if (x < first_point[0]) and (x > new_point[0]):
+                isIntersection = True
+                break
+
+        if m_edge == m2 and b_edge == b2:
+            pass
+        elif m_edge != m2:
+            x = - (b2 - b_edge) / (m2 - m_edge)
+            if (x < second_point[0]) and (x > new_point[0]):
+                isIntersection = True
+                break
 
     return isIntersection, matchPoint
 
