@@ -2,9 +2,11 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import numpy as np
 import math
+from math import cos, sin
 import random
 from random import randint
 from triangleClass import *
+from numpy.linalg import norm
 
 from mathUtils import *
 
@@ -170,10 +172,10 @@ def generateSingleProposal(proposal_edge, edge, packing, angle):
     """
     This function generates a single Proposal triangle when using the weighted distribution method
 
-    :param proposal_edge: the proposal triangle number in packing.dist
-    :param edge: the edge of growth
-    :param packing: the random packing
-    :param angle: the angle of the triangle
+    :param proposal_edge: the proposal triangle number in packing.dist, an int
+    :param edge: the edge of growth, an int
+    :param packing: the random packing, a packing object
+    :param angle: the angle of the triangle, a float
     :return proposal_triangle: the proposal triangle
     """
     point1 = packing.boundary[edge]
@@ -182,10 +184,15 @@ def generateSingleProposal(proposal_edge, edge, packing, angle):
 
     # First we check which orientation triangle we're creating based on the boundary dist, and then create
     if packing.boundaryDist[proposal_edge] == packing.boundaryDist[(proposal_edge + 1) % len(packing.boundaryDist)]:
-        orientation = 'Left'
-        proposal_triangle =
-    if packing.boundaryDist[proposal_edge] == packing.boundaryDist[(proposal_edge - 1) % len(packing.boundaryDist)]:
-        orientation = 'Right'
+        # If this is the case, then we have left orientation and we make the new point to be closer to the edge_point
+        [x1, y1] = point1
+        v_x = 1/x1*(cos(toRadians(90-angle/2))*norm(point1) - y1)
+        v = [1, v_x]/norm([1, v_x])
+        new_point = point1 + v
+        proposal_triangle = np.asarray([point1, point2, new_point])
+    elif packing.boundaryDist[proposal_edge] == packing.boundaryDist[(proposal_edge - 1) % len(packing.boundaryDist)]:
+        # If this is the case, then we have right orientation and we make the new point to be farther from the
+        # edge_point
         proposal_triangle =
     else:
         # When we're adding onto the edge opposite the angle of interest

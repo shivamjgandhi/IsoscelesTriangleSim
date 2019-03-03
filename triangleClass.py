@@ -95,8 +95,9 @@ class randomPacking:
         if match_point:
 
         else:
-            new_boundary = np.concatenate((self.boundary[0:growth_edge], [new_point], self.boundary[growth_edge:]),
+            self.boundary = np.concatenate((self.boundary[0:growth_edge], [new_point], self.boundary[growth_edge:]),
                                           axis=0)
+            # As for updating the boundary dist, this depends on what length edges were added.
 
         return self
 
