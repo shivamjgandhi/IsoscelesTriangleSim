@@ -73,7 +73,7 @@ class randomPacking:
 
         :param proposal: the proposal triangle being added to the packing, a triangle object
         :param match_point: the index of the boundary point with the match for the new point, an int or bool
-        :param growth_edge: the index of the boundary point being added on to
+        :param growth_edge: the index of the boundary point being added on to, an int
         :return: the updated packing, a packing object
         """
         # update packing center and radius of gyration
@@ -93,6 +93,14 @@ class randomPacking:
 
         # check if there is a matchPoint. If there is none, then the update is much easier
         if match_point:
+            # in case the match point is ahead of the growth edge in the packing
+            if match_point > growth_edge:
+                self.boundary = np.concatenate((self.boundary[0:growth_edge], self.boundary[match_point:]))
+            # in case the match point is before the growth edge in the packing
+            else:
+                self.boundary = np.concatenate((self.boundary[0:match_point], self.boundary[growth_edge+1:]))
+
+
 
         else:
             self.boundary = np.concatenate((self.boundary[0:growth_edge], [new_point], self.boundary[growth_edge:]),
