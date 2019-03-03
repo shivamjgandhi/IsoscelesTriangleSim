@@ -201,7 +201,19 @@ def generateSingleProposal(proposal_edge, edge, packing, angle):
     elif packing.boundaryDist[proposal_edge] == packing.boundaryDist[(proposal_edge - 1) % len(packing.boundaryDist)]:
         # If this is the case, then we have right orientation and we make the new point to be farther from the
         # edge_point
-        proposal_triangle =
+        theta = acos(point1[0] / norm(point1))
+        # Compute rotation matrix R1, R2
+        c1, s1 = np.cos(theta), np.sin(theta)
+        c2, s2 = np.cos(-toRadians(angle), -toRadians(angle))
+        R1 = np.array(((c1, -s1), (s1, c1)))
+        R2 = np.array(((c2, -s2), (s2, c2)))
+        # Compute v'
+        v_prime = np.asarray([-sin(toRadians(90 - angle / 2)), cos(toRadians(90 - angle / 2))])
+        # Compute v
+        v = R2.dot(R1.dot(v_prime))
+        # Compute the new_point and proposal triangle
+        new_point = point2 + v
+        proposal_triangle = np.asarray([point1, point2, new_point])
     else:
         # When we're adding onto the edge opposite the angle of interest
         Midpoint = point1 + 1 / 2 * AB
