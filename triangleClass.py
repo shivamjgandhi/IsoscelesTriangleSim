@@ -68,12 +68,13 @@ class randomPacking:
                               np.dot(new_proposal.center, new_proposal.center) / (self.triangleCount + 1)
         return new_radius_gyration
 
-    def updatePacking(self, proposal, growth_edge, match_point=None):
+    def updatePacking(self, proposal, growth_edge, randomEdge, match_point=None):
         """
 
         :param proposal: the proposal triangle being added to the packing, a triangle object
         :param match_point: the index of the boundary point with the match for the new point, an int or bool
         :param growth_edge: the index of the boundary point being added on to, an int
+        :param randomEdge:
         :return: the updated packing, a packing object
         """
         # update packing center and radius of gyration
@@ -99,13 +100,12 @@ class randomPacking:
             # in case the match point is before the growth edge in the packing
             else:
                 self.boundary = np.concatenate((self.boundary[0:match_point], self.boundary[growth_edge+1:]))
-
-
-
         else:
             self.boundary = np.concatenate((self.boundary[0:growth_edge], [new_point], self.boundary[growth_edge:]),
                                           axis=0)
-            # As for updating the boundary dist, this depends on what length edges were added.
+
+        # As for updating the boundary dist, this depends on what length edges were added.
+
 
         return self
 

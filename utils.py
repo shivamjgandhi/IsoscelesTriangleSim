@@ -121,7 +121,7 @@ def generateIndividualTriangle(packing, angle, method):
             if math.exp(alpha*deltaRadiusGyration) >= t:
                 # Add in the new triangle
                 notAdded = False
-                packing.updatePacking(proposal, growthEdge, matchPoint)
+                packing.updatePacking(proposal, growthEdge, randomEdge, matchPoint)
 
     return packing
 
