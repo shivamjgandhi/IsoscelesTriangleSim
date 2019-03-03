@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import numpy as np
 import math
-from math import cos, sin
+from math import cos, sin, acos, asin
 import random
 from random import randint
 from triangleClass import *
@@ -185,11 +185,19 @@ def generateSingleProposal(proposal_edge, edge, packing, angle):
     # First we check which orientation triangle we're creating based on the boundary dist, and then create
     if packing.boundaryDist[proposal_edge] == packing.boundaryDist[(proposal_edge + 1) % len(packing.boundaryDist)]:
         # If this is the case, then we have left orientation and we make the new point to be closer to the edge_point
-        [x1, y1] = point1
-        v_x = 1/x1*(cos(toRadians(90-angle/2))*norm(point1) - y1)
-        v = [1, v_x]/norm([1, v_x])
+        # Compute theta
+        theta = acos(point1[0]/norm(point1))
+        # Compute rotation matrix R
+        c, s = np.cos(theta), np.sin(theta)
+        R = np.array(((c, -s), (s, c)))
+        # Compute v'
+        v_prime = np.asarray([-sin(toRadians(90-angle/2)), cos(toRadians(90-angle/2))])
+        # Compute v
+        v = R.dot(v_prime)
+        # Compute the new_point and proposal triangle
         new_point = point1 + v
         proposal_triangle = np.asarray([point1, point2, new_point])
+
     elif packing.boundaryDist[proposal_edge] == packing.boundaryDist[(proposal_edge - 1) % len(packing.boundaryDist)]:
         # If this is the case, then we have right orientation and we make the new point to be farther from the
         # edge_point
