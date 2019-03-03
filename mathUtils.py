@@ -1,7 +1,7 @@
 import numpy as np
 import math
-from numpy.linalg import norm
 from triangleClass import *
+
 
 def toRadians(angle):
     """
@@ -17,7 +17,7 @@ def norm(vector):
     :param vector: input vector
     :return: norm
     """
-    return round3(math.sqrt(vector[0]*vector[0] + vector[1]*vector[1]))
+    return round3(np.linalg.norm(vector))
 
 def pointSlopeForm(point1, point2):
     """
@@ -120,7 +120,7 @@ def boundaryIntersection(packing, proposal_triangle, growthEdge):
         m_edge, b_edge = pointSlopeForm(packing.boundary[edge_pt],
                                         packing.boundary[(edge_pt + 1)] % len(packing.boundary))
         # check if new_point is the same as edge_pt
-        if comparePoints(edge_pt, new_point):
+        if comparePoints(packing.boundary[edge_pt], new_point):
             matchPoint = edge_pt
 
         # check if the edge intersects with either side of the triangle
