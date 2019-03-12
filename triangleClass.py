@@ -83,8 +83,8 @@ class randomPacking:
         self.packingCenter = new_center
         self.radiusOfGyration = new_radius_gyration
 
-        # update the boundary and distribution
-        # check return the new point
+        ## update the boundary and distribution
+        # return the new point
         first_point = self.boundary[growth_edge]
         second_point = self.boundary[(growth_edge + 1) % len(self.boundary)]
         new_point = None
@@ -104,8 +104,17 @@ class randomPacking:
             self.boundary = np.concatenate((self.boundary[0:growth_edge], [new_point], self.boundary[growth_edge:]),
                                           axis=0)
 
-        # As for updating the boundary dist, this depends on what length edges were added.
+        # As for updating the boundary dist, this depends on what length edges were added. It also depends on whether
+        # there was a match point or not
+        if match_point:
 
+        else:
+            side_length = norm(first_point - second_point)
+            # check if we're adding to a side of length 1
+            if side_length == 1:
+                # update boundary and distribution accordingly
+            else:
+                # added to a side of length not equal to 1
 
         return self
 
