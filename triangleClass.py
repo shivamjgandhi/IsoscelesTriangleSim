@@ -109,7 +109,11 @@ class randomPacking:
         if match_point:
             # if the match comes before
             if match_point < growth_edge:
+                k = growth_edge - match_point
+                side_length = norm(second_point - match_point)
+                if (side_length > 0.98) and (side_length < 1.02):
 
+                else:
             # if the match comes after
             else:
 
