@@ -68,13 +68,13 @@ class randomPacking:
                               np.dot(new_proposal.center, new_proposal.center) / (self.triangleCount + 1)
         return new_radius_gyration
 
-    def updatePacking(self, proposal, growth_edge, randomEdge, match_point=None):
+    def updatePacking(self, proposal, growth_edge, random_edge, match_point=None):
         """
 
         :param proposal: the proposal triangle being added to the packing, a triangle object
         :param match_point: the index of the boundary point with the match for the new point, an int or bool
         :param growth_edge: the index of the boundary point being added on to, an int
-        :param randomEdge:
+        :param randomEdge: the index of the boundaryDist int corresponding to what's being added, an int
         :return: the updated packing, a packing object
         """
         # update packing center and radius of gyration
@@ -107,14 +107,25 @@ class randomPacking:
         # As for updating the boundary dist, this depends on what length edges were added. It also depends on whether
         # there was a match point or not
         if match_point:
+            # if the match comes before
+            if match_point < growth_edge:
+
+            # if the match comes after
+            else:
 
         else:
             side_length = norm(first_point - second_point)
             # check if we're adding to a side of length 1
-            if side_length == 1:
-                # update boundary and distribution accordingly
+            if (side_length > 0.98) and (side_length < 1.02):
+                # update distribution accordingly
+
             else:
-                # added to a side of length not equal to 1
+                # added to a side of length not equal to 1. Thus check if right or left triangle
+                # if right side
+                if self.boundaryDist[random_edge] == self.boundaryDist[(random_edge - 1) % len(self.boundaryDist)]:
+
+                # if left side
+                else:
 
         return self
 

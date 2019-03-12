@@ -112,7 +112,7 @@ def generateIndividualTriangle(packing, angle, method):
             growthEdge = packing.boundary[randomEdge]
         elif method == 'proposals':
             # in this case, randomEdge is between 0 and len(boundarydist)
-            growthEdge = packing.boundary[randomEdge]
+            growthEdge = packing.boundary[packing.boundaryDist[randomEdge]]
             proposal = generateSingleProposal(randomEdge, growthEdge, packing, angle)
         isIntersection, matchPoint = boundaryIntersection(proposal, packing, randomEdge)
         if not isIntersection:
@@ -175,7 +175,7 @@ def generateSingleProposal(proposal_edge, edge, packing, angle):
     """
     This function generates a single Proposal triangle when using the weighted distribution method
 
-    :param proposal_edge: the proposal triangle number in packing.dist, an int
+    :param proposal_edge: the proposal triangle index in packing.dist, an int
     :param edge: the edge of growth, an int
     :param packing: the random packing, a packing object
     :param angle: the angle of the triangle, a float
