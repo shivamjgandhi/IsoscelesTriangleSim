@@ -74,7 +74,7 @@ class randomPacking:
         :param proposal: the proposal triangle being added to the packing, a triangle object
         :param match_point: the index of the boundary point with the match for the new point, an int or bool
         :param growth_edge: the index of the boundary point being added on to, an int
-        :param randomEdge: the index of the boundaryDist int corresponding to what's being added, an int
+        :param random_edge: the index of the boundaryDist int corresponding to what's being added, an int
         :return: the updated packing, a packing object
         """
         # update packing center and radius of gyration
@@ -124,7 +124,8 @@ class randomPacking:
             # check if we're adding to a side of length 1
             if (side_length > 0.98) and (side_length < 1.02):
                 # update distribution accordingly
-
+                a = self.boundaryDist[random_edge]
+                self.boundaryDist = np.concatenate((self.boundaryDist[0:random_edge] , [a, a+1, a+1] , (1 + self.boundaryDist[random_edge:])))
             else:
                 # added to a side of length not equal to 1. Thus check if right or left triangle
                 # if right side
