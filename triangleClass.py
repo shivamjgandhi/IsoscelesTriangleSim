@@ -130,10 +130,16 @@ class randomPacking:
                 # added to a side of length not equal to 1. Thus check if right or left triangle
                 # if right side
                 if self.boundaryDist[random_edge] == self.boundaryDist[(random_edge - 1) % len(self.boundaryDist)]:
-
+                    a = self.boundaryDist[random_edge]
+                    self.boundaryDist = np.concatenate((self.boundaryDist[0:random_edge-1],
+                                                        [a + 1, a + 1],
+                                                        1 + self.boundaryDist[random_edge + 1:]))
                 # if left side
                 else:
-
+                    a = self.boundaryDist[random_edge]
+                    self.boundaryDist = np.concatenate((self.boundaryDist[0:random_edge],
+                                                        [a + 1],
+                                                        1 + self.boundaryDist[random_edge + 1:]))
         return self
 
 
