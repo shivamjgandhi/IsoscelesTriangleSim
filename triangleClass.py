@@ -11,9 +11,10 @@ class randomPacking:
         :param triangleCount: the number of triangles in the packing, an int
         :param triangleList: a list of all of the individual triangles, a list
         """
-
+        """
         if boundaryDist is None:
             self.boundaryDist = np.asarray([0, 1, 1, 2, 2])
+        """
         self.boundary = boundary
         self.triangleCount = triangleCount
         self.triangleList = triangleList
@@ -104,6 +105,7 @@ class randomPacking:
             self.boundary = np.concatenate((self.boundary[0:growth_edge], [new_point], self.boundary[growth_edge:]),
                                           axis=0)
 
+        """
         # As for updating the boundary dist, this depends on what length edges were added. It also depends on whether
         # there was a match point or not
         if match_point:
@@ -140,6 +142,7 @@ class randomPacking:
                     self.boundaryDist = np.concatenate((self.boundaryDist[0:random_edge],
                                                         [a + 1],
                                                         1 + self.boundaryDist[random_edge + 1:]))
+        """
         return self
 
 

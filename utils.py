@@ -107,9 +107,10 @@ def generateIndividualTriangle(packing, angle, method):
     growthEdge = None
     alpha = 1
     while notAdded:
-        randomEdge = packing.generateRandomEdge(method='proposals')
+        randomEdge = packing.generateRandomEdge(method='uniform')
         if method == 'uniform':
             growthEdge = packing.boundary[randomEdge]
+            proposal = generateUniformProposal(growthEdge, packing, angle)
         elif method == 'proposals':
             # in this case, randomEdge is between 0 and len(boundarydist)
             growthEdge = packing.boundary[packing.boundaryDist[randomEdge]]
@@ -217,6 +218,66 @@ def generateSingleProposal(proposal_edge, edge, packing, angle):
         # Compute the new_point and proposal triangle
         new_point = point2 + v
         proposal_triangle = np.asarray([point1, point2, new_point])
+    else:
+        # When we're adding onto the edge opposite the angle of interest
+        Midpoint = point1 + 1 / 2 * AB
+        e = [-AB[1], AB[0]]
+        magnitude = round3(1 / 2 / math.tan(angle / 2))
+        v = round3([magnitude * elem for elem in e])
+
+        # proposal coordinates
+        point3 = Midpoint - v
+        coordinates = np.asarray([point1, point2, point3])
+        proposal_triangle = triangle(coordinates, None)
+
+    return proposal_triangle
+
+def generateUniformProposal(edge, packing, angle):
+    point1 = packing.boundary[edge]
+    point2 = packing.boundary[(edge + 1) % len(packing.boundary)]
+    AB = point2 - point1
+    length = norm(AB)
+    mode = None
+    if (length > 1.02) or (length < 0.98):
+        t = random.uniform(0, 1)
+        if t >= 0.5:
+            mode = "right"
+        else:
+            mode = "left"
+
+    # First we check which orientation triangle we're creating based on the boundary dist, and then create
+    if mode == "left":
+        # If this is the case, then we have left orientation and we make the new point to be closer to the edge_point
+        # Compute theta
+        theta = acos(point1[0] / norm(point1))
+        # Compute rotation matrix R
+        c, s = np.cos(theta), np.sin(theta)
+        R = np.array(((c, -s), (s, c)))
+        # Compute v'
+        v_prime = np.asarray([-sin(toRadians(90 - angle / 2)), cos(toRadians(90 - angle / 2))])
+        # Compute v
+        v = R.dot(v_prime)
+        # Compute the new_point and proposal triangle
+        new_point = point1 + v
+        proposal_triangle = np.asarray([point1, point2, new_point])
+
+    elif mode == "right":
+        # If this is the case, then we have right orientation and we make the new point to be farther from the
+        # edge_point
+        theta = acos(point1[0] / norm(point1))
+        # Compute rotation matrix R1, R2
+        c1, s1 = np.cos(theta), np.sin(theta)
+        c2, s2 = np.cos(-toRadians(angle), -toRadians(angle))
+        R1 = np.array(((c1, -s1), (s1, c1)))
+        R2 = np.array(((c2, -s2), (s2, c2)))
+        # Compute v'
+        v_prime = np.asarray([-sin(toRadians(90 - angle / 2)), cos(toRadians(90 - angle / 2))])
+        # Compute v
+        v = R2.dot(R1.dot(v_prime))
+        # Compute the new_point and proposal triangle
+        new_point = point2 + v
+        proposal_triangle = np.asarray([point1, point2, new_point])
+
     else:
         # When we're adding onto the edge opposite the angle of interest
         Midpoint = point1 + 1 / 2 * AB
