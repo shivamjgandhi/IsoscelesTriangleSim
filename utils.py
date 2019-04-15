@@ -109,15 +109,14 @@ def generateIndividualTriangle(packing, angle, method):
     while notAdded:
         randomEdge = packing.generateRandomEdge(method='uniform')
         if method == 'uniform':
-            growthEdge = packing.boundary[randomEdge]
-            proposal = generateUniformProposal(growthEdge, packing, angle)
+            proposal = generateUniformProposal(randomEdge, packing, angle)
         elif method == 'proposals':
             # in this case, randomEdge is between 0 and len(boundarydist)
             growthEdge = packing.boundary[packing.boundaryDist[randomEdge]]
             proposal = generateSingleProposal(randomEdge, growthEdge, packing, angle)
-        isIntersection, matchPoint = boundaryIntersection(proposal, packing, randomEdge)
+        isIntersection, matchPoint = boundaryIntersection(packing, proposal, randomEdge)
         if not isIntersection:
-            deltaRadiusGyration = np.max(packing.computeNewRadiusGyration() - packing.radiusOfGyration, 0)
+            deltaRadiusGyration = np.max(packing.computeNewRadiusGyration(proposal) - packing.radiusOfGyration, 0)
             t = random.uniform(0, 1)
             if math.exp(alpha*deltaRadiusGyration) >= t:
                 # Add in the new triangle

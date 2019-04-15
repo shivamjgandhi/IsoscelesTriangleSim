@@ -118,7 +118,7 @@ def boundaryIntersection(packing, proposal_triangle, growthEdge):
     isIntersection = False
     for edge_pt in range(len(packing.boundary)):
         m_edge, b_edge = pointSlopeForm(packing.boundary[edge_pt],
-                                        packing.boundary[(edge_pt + 1)] % len(packing.boundary))
+                                        packing.boundary[(edge_pt + 1) % len(packing.boundary)])
         # check if new_point is the same as edge_pt
         if comparePoints(packing.boundary[edge_pt], new_point):
             matchPoint = edge_pt

@@ -11,8 +11,8 @@ def arg_parse():
     :return: Arguments for triangle simulation
     """
     parser = argparse.ArgumentParser(description='Isosceles Triangle Simulation')
-    parser.add_argument("--angle", dest="angle", help="Primary angle of the isoscles triangle",
-                        default=90, type=int)
+    parser.add_argument("--angle", dest="angle", help="Primary angle of the isosceles triangle",
+                        default=75, type=int)
     parser.add_argument("--number", dest="N", help="Number of triangles to simulate",
                         default=30, type=int)
     return parser.parse_args()
