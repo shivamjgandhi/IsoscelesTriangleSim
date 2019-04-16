@@ -50,6 +50,8 @@ def generateTriangles(angle, N, method):
     triangleCoordinates = np.asarray([point1, point2, point3])
     firstTriangle = triangle(triangleCoordinates, 1)
     packing = randomPacking(firstTriangle.coordinates, 1, [firstTriangle])
+    packing.packingCenter = firstTriangle.center
+    packing.computeNewRadiusGyration(firstTriangle)
     print('added triangle 1')
 
     # Generate the other N-1 triangles
@@ -108,20 +110,23 @@ def generateIndividualTriangle(packing, angle, method):
     alpha = 1
     while notAdded:
         randomEdge = packing.generateRandomEdge(method='uniform')
+        proposal = generateUniformProposal(randomEdge, packing, angle)
+        """
         if method == 'uniform':
             proposal = generateUniformProposal(randomEdge, packing, angle)
         elif method == 'proposals':
             # in this case, randomEdge is between 0 and len(boundarydist)
             growthEdge = packing.boundary[packing.boundaryDist[randomEdge]]
             proposal = generateSingleProposal(randomEdge, growthEdge, packing, angle)
+        """
         isIntersection, matchPoint = boundaryIntersection(packing, proposal, randomEdge)
         if not isIntersection:
             deltaRadiusGyration = np.max(packing.computeNewRadiusGyration(proposal) - packing.radiusOfGyration, 0)
             t = random.uniform(0, 1)
-            if math.exp(alpha*deltaRadiusGyration) >= t:
+            if math.exp(-alpha*deltaRadiusGyration) >= t:
                 # Add in the new triangle
                 notAdded = False
-                packing.updatePacking(proposal, growthEdge, randomEdge, matchPoint)
+                packing.updatePacking(proposal, growthEdge, matchPoint)
 
     return packing
 
