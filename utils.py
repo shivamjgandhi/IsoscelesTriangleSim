@@ -126,7 +126,7 @@ def generateIndividualTriangle(packing, angle, method):
             if math.exp(-alpha*deltaRadiusGyration) >= t:
                 # Add in the new triangle
                 notAdded = False
-                packing.updatePacking(proposal, growthEdge, matchPoint)
+                packing.updatePacking(proposal, randomEdge, matchPoint)
 
     return packing
 
@@ -253,7 +253,8 @@ def generateUniformProposal(edge, packing, angle):
     if mode == "left":
         # If this is the case, then we have left orientation and we make the new point to be closer to the edge_point
         # Compute theta
-        theta = acos(point1[0] / norm(point1))
+        # print(acos(AB[0] / norm(AB)), AB, point1, point2)
+        theta = acos(AB[0] / norm(AB))
         # Compute rotation matrix R
         c, s = np.cos(theta), np.sin(theta)
         R = np.array(((c, -s), (s, c)))
@@ -263,15 +264,16 @@ def generateUniformProposal(edge, packing, angle):
         v = R.dot(v_prime)
         # Compute the new_point and proposal triangle
         new_point = point1 + v
-        proposal_triangle = np.asarray([point1, point2, new_point])
+        proposal_triangle = triangle(np.asarray([point1, point2, new_point]), None)
 
     elif mode == "right":
         # If this is the case, then we have right orientation and we make the new point to be farther from the
         # edge_point
-        theta = acos(point1[0] / norm(point1))
+        # print(acos(AB[0] / norm(AB)), AB, point1, point2)
+        theta = acos(AB[0] / norm(AB))
         # Compute rotation matrix R1, R2
         c1, s1 = np.cos(theta), np.sin(theta)
-        c2, s2 = np.cos(-toRadians(angle), -toRadians(angle))
+        c2, s2 = np.cos(-toRadians(angle)), np.cos(-toRadians(angle))
         R1 = np.array(((c1, -s1), (s1, c1)))
         R2 = np.array(((c2, -s2), (s2, c2)))
         # Compute v'
@@ -280,7 +282,7 @@ def generateUniformProposal(edge, packing, angle):
         v = R2.dot(R1.dot(v_prime))
         # Compute the new_point and proposal triangle
         new_point = point2 + v
-        proposal_triangle = np.asarray([point1, point2, new_point])
+        proposal_triangle = triangle(np.asarray([point1, point2, new_point]), None)
 
     else:
         # When we're adding onto the edge opposite the angle of interest

@@ -95,13 +95,25 @@ class randomPacking:
         if match_point:
             # in case the match point is ahead of the growth edge in the packing
             if match_point > growth_edge:
+                print('old length method 1', len(self.boundary))
+                # print('boundary: ', self.boundary)
                 self.boundary = np.concatenate((self.boundary[0:growth_edge], self.boundary[match_point:]))
+                print('new length: ', len(self.boundary))
+                # print('boundary: ', self.boundary)
             # in case the match point is before the growth edge in the packing
             else:
+                print('old length method 2', len(self.boundary))
+                # print('boundary: ', self.boundary)
                 self.boundary = np.concatenate((self.boundary[0:match_point], self.boundary[growth_edge+1:]))
+                print('new length: ', len(self.boundary))
+                # print('boundary: ', self.boundary)
         else:
+            print('old length method 3', len(self.boundary))
+            # print('boundary: ', self.boundary)
             self.boundary = np.concatenate((self.boundary[0:growth_edge], [new_point], self.boundary[growth_edge:]),
                                           axis=0)
+            print('new length: ', len(self.boundary))
+            # print('boundary: ', self.boundary)
 
         """
         # As for updating the boundary dist, this depends on what length edges were added. It also depends on whether
