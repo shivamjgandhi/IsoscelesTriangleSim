@@ -44,8 +44,8 @@ def generateTriangles(angle, N, method):
     angle = toRadians(angle)
     # generate the first triangle
     point1 = [0, 0]
-    point2 = [round3(2 * math.sin(angle / 2)), 0]
-    point3 = [round3(math.sin(angle / 2)), round3(math.cos(angle / 2))]
+    point2 = [1, 0]
+    point3 = [1/2, 0.5/round3(math.tan(angle / 2))]
 
     triangleCoordinates = np.asarray([point1, point2, point3])
     firstTriangle = triangle(triangleCoordinates, 1)
@@ -120,6 +120,13 @@ def generateIndividualTriangle(packing, angle, method):
             proposal = generateSingleProposal(randomEdge, growthEdge, packing, angle)
         """
         isIntersection, matchPoint = boundaryIntersection(packing, proposal, randomEdge)
+        deltaRadiusGyration = np.max(packing.computeNewRadiusGyration(proposal) - packing.radiusOfGyration, 0)
+        t = random.uniform(0, 1)
+        if math.exp(-alpha * deltaRadiusGyration) >= t:
+            # Add in the new triangle
+            notAdded = False
+            packing.updatePacking(proposal, randomEdge, matchPoint)
+        """
         if not isIntersection:
             deltaRadiusGyration = np.max(packing.computeNewRadiusGyration(proposal) - packing.radiusOfGyration, 0)
             t = random.uniform(0, 1)
@@ -127,6 +134,7 @@ def generateIndividualTriangle(packing, angle, method):
                 # Add in the new triangle
                 notAdded = False
                 packing.updatePacking(proposal, randomEdge, matchPoint)
+        """
 
     return packing
 
@@ -249,42 +257,32 @@ def generateUniformProposal(edge, packing, angle):
         else:
             mode = "left"
 
+    scaling_value = 1
+
     # First we check which orientation triangle we're creating based on the boundary dist, and then create
     if mode == "left":
+        print('type 1')
         # If this is the case, then we have left orientation and we make the new point to be closer to the edge_point
-        # Compute theta
-        # print(acos(AB[0] / norm(AB)), AB, point1, point2)
-        theta = acos(AB[0] / norm(AB))
-        # Compute rotation matrix R
-        c, s = np.cos(theta), np.sin(theta)
-        R = np.array(((c, -s), (s, c)))
-        # Compute v'
-        v_prime = np.asarray([-sin(toRadians(90 - angle / 2)), cos(toRadians(90 - angle / 2))])
-        # Compute v
-        v = R.dot(v_prime)
-        # Compute the new_point and proposal triangle
-        new_point = point1 + v
+        # Compute theta, compute v, rotate v by theta, and add to the first point
+        theta = recoverAngle(AB)
+        v = scaling_value*np.asarray([cos(math.pi/2 - angle/2), -sin(math.pi/2 - angle/2)])
+        R = np.asarray([[math.cos(theta), -math.sin(theta)], [math.sin(theta), math.cos(theta)]])
+        new_point = point1 + np.matmul(R, v)
         proposal_triangle = triangle(np.asarray([point1, point2, new_point]), None)
 
     elif mode == "right":
+        print('type 2')
         # If this is the case, then we have right orientation and we make the new point to be farther from the
         # edge_point
-        # print(acos(AB[0] / norm(AB)), AB, point1, point2)
-        theta = acos(AB[0] / norm(AB))
-        # Compute rotation matrix R1, R2
-        c1, s1 = np.cos(theta), np.sin(theta)
-        c2, s2 = np.cos(-toRadians(angle)), np.cos(-toRadians(angle))
-        R1 = np.array(((c1, -s1), (s1, c1)))
-        R2 = np.array(((c2, -s2), (s2, c2)))
-        # Compute v'
-        v_prime = np.asarray([-sin(toRadians(90 - angle / 2)), cos(toRadians(90 - angle / 2))])
-        # Compute v
-        v = R2.dot(R1.dot(v_prime))
-        # Compute the new_point and proposal triangle
-        new_point = point2 + v
+        # Compute theta, compute v, rotate v by theta, and add to the second point
+        theta = recoverAngle(AB)
+        v = scaling_value*np.asarray([-cos(math.pi/2 - angle/2), -sin(math.pi/2 - angle/2)])
+        R = np.asarray([[math.cos(theta), -math.sin(theta)], [math.sin(theta), math.cos(theta)]])
+        new_point = point2 + np.matmul(R, v)
         proposal_triangle = triangle(np.asarray([point1, point2, new_point]), None)
 
     else:
+        print('type 3')
         # When we're adding onto the edge opposite the angle of interest
         Midpoint = point1 + 1 / 2 * AB
         e = [-AB[1], AB[0]]
@@ -296,4 +294,17 @@ def generateUniformProposal(edge, packing, angle):
         coordinates = np.asarray([point1, point2, point3])
         proposal_triangle = triangle(coordinates, None)
 
+    # print('boundary: ', packing.boundary)
+    # print('proposal triangle: ', proposal_triangle.coordinates)
     return proposal_triangle
+
+def recoverAngle(vector):
+    """
+    Returns the angle the vector makes to the vector [1, 0]
+    :param vector: The vector we want to find the angle of
+    :return theta: The angle that the vector makes with the horizontal [1, 0] in radians
+    """
+    theta = acos(vector[0]/norm(vector))
+    if vector[1] < 0:
+        theta = 2*math.pi - theta
+    return theta

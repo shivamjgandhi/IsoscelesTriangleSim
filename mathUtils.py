@@ -80,7 +80,7 @@ def fastIntersection(proposal, packing, randomEdge):
                     break
     else:
         oldPoint1 = packing.boundary[randomEdge]
-        oldPoint2 = packing.boundary[(randomEdge + 1) ]
+        oldPoint2 = packing.boundary[(randomEdge + 1)]
         # Forward direction
         # for i in range(4):
 
